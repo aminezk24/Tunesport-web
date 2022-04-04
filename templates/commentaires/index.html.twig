@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaires index
+{% endblock %}
+
+{% block body %}
+
+	<div class='container pt-5 pb-5'>
+		<div class='pb-5 pt-5' style='display:flex; justify-content:end;'>
+			<button class='btn btn-primary '>
+				<a href="{{ path('app_commentaires_new') }}" style='color:white'>Create new</a>
+			</button>
+		</div>
+		<table class="table ">
+			<thead class="table-primary">
+				<tr>
+					<th>IdCommentaire</th>
+					<th>TitreCommentaire</th>
+					<th>ContenuCommentaire</th>
+					<th>DateCommentaire</th>
+					<th>IdArt</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for commentaire in commentaires %}
+					<tr>
+						<td>{{ commentaire.idCommentaire }}</td>
+						<td>{{ commentaire.titreCommentaire }}</td>
+						<td>{{ commentaire.contenuCommentaire }}</td>
+						<td>{{ commentaire.dateCommentaire ? commentaire.dateCommentaire|date('Y-m-d') : '' }}</td>
+						<td>{{ commentaire.idArt }}</td>
+						<td>
+							<button class="btn btn-info">
+								<a href="{{ path('app_commentaires_show', {'idCommentaire': commentaire.idCommentaire}) }}" style='color:white'>show</a>
+							</button>
+							<button class="btn btn-info">
+								<a href="{{ path('app_commentaires_edit', {'idCommentaire': commentaire.idCommentaire}) }}" style='color:white'>edit</a>
+							</button>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

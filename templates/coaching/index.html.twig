@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coaching index{% endblock %}
+
+{% block body %}
+    <h1>Coaching index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idcoa</th>
+                <th>Nicknamecoa</th>
+                <th>Rankcoa</th>
+                <th>Gamecoa</th>
+                <th>Descoa</th>
+                <th>Imagecoa</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coaching in coachings %}
+            <tr>
+                <td>{{ coaching.idcoa }}</td>
+                <td>{{ coaching.nicknamecoa }}</td>
+                <td>{{ coaching.rankcoa }}</td>
+                <td>{{ coaching.gamecoa }}</td>
+                <td>{{ coaching.descoa }}</td>
+                <td>{{ coaching.imagecoa }}</td>
+                <td>
+                    <a href="{{ path('app_coaching_show', {'idcoa': coaching.idcoa}) }}">show</a>
+                    <a href="{{ path('app_coaching_edit', {'idcoa': coaching.idcoa}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_coaching_new') }}">Create new</a>
+{% endblock %}

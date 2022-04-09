@@ -45,9 +45,9 @@ class Reclamation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="heur_r", type="datetime", nullable=false, options={"default"="current_timestamp()"})
+     * @ORM\Column(name="heur_r", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $heurR = 'current_timestamp()';
+    private $heurR = 'CURRENT_TIMESTAMP';
 
     public function getIdR(): ?int
     {

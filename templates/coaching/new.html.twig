@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Coaching{% endblock %}
+
+{% block body %}
+    <h1>Create new Coaching</h1>
+
+    {{ include('coaching/_form.html.twig') }}
+
+    <a href="{{ path('app_coaching_index') }}">back to list</a>
+{% endblock %}

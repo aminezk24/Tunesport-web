@@ -52,9 +52,9 @@ class Reservation
     /**
      * @var int|null
      *
-     * @ORM\Column(name="idCli", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="idCli", type="integer", nullable=true)
      */
-    private $idcli = NULL;
+    private $idcli;
 
     /**
      * @var int

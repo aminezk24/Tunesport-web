@@ -2,73 +2,93 @@
 
 namespace App\Entity;
 
+use App\Repository\MiseajourRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
- * Miseajour
- *
- * @ORM\Table(name="miseajour", indexes={@ORM\Index(name="fk_jeux", columns={"idjeux"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=MiseajourRepository::class)
  */
 class Miseajour
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idmise", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idmise;
+    private $id;
+
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nomjeu", type="string", length=60, nullable=false)
+     * @Assert\NotBlank(message="nom jeu is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
+     * @ORM\Column(type="string", length=255)
      */
     private $nomjeu;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="pubmise", type="date", nullable=false)
+     * @ORM\Column(type="date")
      */
     private $pubmise;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="versionmise", type="string", length=60, nullable=false)
+     * @Assert\NotBlank(message="version mise a jour is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
+     * @ORM\Column(type="string", length=255)
      */
     private $versionmise;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="taillemise", type="integer", nullable=false)
+     * @Assert\NotBlank(message="taille  is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
+     * @ORM\Column(type="string", length=255)
      */
     private $taillemise;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="descmise", type="string", length=300, nullable=false)
+     * @Assert\NotBlank(message="descmise is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
+     * @ORM\Column(type="string", length=255)
      */
     private $descmise;
 
     /**
-     * @var \Jeux
-     *
-     * @ORM\ManyToOne(targetEntity="Jeux")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idjeux", referencedColumnName="idjeux")
-     * })
+    /*** @ORM\ManyToOne(targetEntity="Jeux" , inversedBy="miseajours")
+     * @ORM\JoinColumn(name="idjeux", referencedColumnName="idjeux")
      */
-    private $idjeux;
 
-    public function getIdmise(): ?int
+    private $jeux;
+
+
+
+    public function getId(): ?int
     {
-        return $this->idmise;
+        return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getNomjeu(): ?string
@@ -107,12 +127,12 @@ class Miseajour
         return $this;
     }
 
-    public function getTaillemise(): ?int
+    public function getTaillemise(): ?string
     {
         return $this->taillemise;
     }
 
-    public function setTaillemise(int $taillemise): self
+    public function setTaillemise(string $taillemise): self
     {
         $this->taillemise = $taillemise;
 
@@ -131,17 +151,21 @@ class Miseajour
         return $this;
     }
 
-    public function getIdjeux(): ?Jeux
+    public function getJeux(): ?Jeux
     {
-        return $this->idjeux;
+        return $this->jeux;
     }
 
-    public function setIdjeux(?Jeux $idjeux): self
+    public function setJeux(?Jeux $jeux): self
     {
-        $this->idjeux = $idjeux;
+        $this->jeux = $jeux;
 
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getNomjeu();
+    }
 
 }

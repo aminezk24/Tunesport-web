@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h4 class="mt-5 mb-5">Update mise mise</h4>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                <div class="form-group" >
+                    {{ form_label(form.nomjeu) }}
+                    {{ form_widget(form.nomjeu,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.versionmise) }}
+                    {{ form_widget(form.versionmise,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.taillemise) }}
+                    {{ form_widget(form.taillemise,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.descmise) }}
+                    {{ form_widget(form.descmise,{'attr':{'class':'form-control'}})}}
+                </div>
+
+
+                {{ form_end(form) }}
+                <div class="form-group" >
+                    <button class="btn btn-info mt-2 text-white">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

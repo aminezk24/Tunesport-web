@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Jeux
@@ -17,12 +21,18 @@ class Jeux
      *
      * @ORM\Column(name="idjeux", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
      */
     private $idjeux;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="nom jeux is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
      *
      * @ORM\Column(name="nomjeux", type="string", length=50, nullable=false)
      */
@@ -36,14 +46,26 @@ class Jeux
     private $datesortjeux;
 
     /**
-     * @var int
+     * @var string
+     * @Assert\NotBlank(message="taille jeux is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
      *
-     * @ORM\Column(name="taillejeux", type="integer", nullable=false)
+     * @ORM\Column(name="taillejeux", type="string", length=60, nullable=false)
      */
     private $taillejeux;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="description is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
      *
      * @ORM\Column(name="descjeux", type="string", length=300, nullable=false)
      */
@@ -51,17 +73,43 @@ class Jeux
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="platforme is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
+     *@Assert\Choice({"console", "pc","mobile"})
+     *@Assert\NotBlank(message="vous n'avez rien choisi")
      * @ORM\Column(name="platdispojeux", type="string", length=60, nullable=false)
      */
     private $platdispojeux;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="configuration is empty")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "doit etre >=2",
+     *     maxMessage = "doit etre <=50")
+     *
      *
      * @ORM\Column(name="conreqjeux", type="string", length=300, nullable=false)
      */
     private $conreqjeux;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Miseajour::class, mappedBy="Jeux")
+     */
+    private $miseajours;
+
+    public function __construct()
+    {
+        $this->miseajours = new ArrayCollection();
+    }
+
+
 
     public function getIdjeux(): ?int
     {
@@ -92,12 +140,12 @@ class Jeux
         return $this;
     }
 
-    public function getTaillejeux(): ?int
+    public function getTaillejeux(): ?string
     {
         return $this->taillejeux;
     }
 
-    public function setTaillejeux(int $taillejeux): self
+    public function setTaillejeux(string $taillejeux): self
     {
         $this->taillejeux = $taillejeux;
 
@@ -139,6 +187,37 @@ class Jeux
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Miseajour>
+     */
+    public function getMiseajours(): Collection
+    {
+        return $this->miseajours;
+    }
+
+    public function addMiseajour(Miseajour $miseajour): self
+    {
+        if (!$this->miseajours->contains($miseajour)) {
+            $this->miseajours[] = $miseajour;
+            $miseajour->setJeux($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMiseajour(Miseajour $miseajour): self
+    {
+        if ($this->miseajours->removeElement($miseajour)) {
+            // set the owning side to null (unless already changed)
+            if ($miseajour->getJeux() === $this) {
+                $miseajour->setJeux(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 
 }

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h4 class="mt-5 mb-5">Update jeux</h4>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="form-group" >
+                    {{ form_label(form.nomjeux) }}
+                    {{ form_widget(form.nomjeux,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.nomjeux,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.taillejeux) }}
+                    {{ form_widget(form.taillejeux,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.taillejeux,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.descjeux) }}
+                    {{ form_widget(form.descjeux,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.descjeux,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.platdispojeux) }}
+                    {{ form_widget(form.platdispojeux,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.platdispojeux,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.conreqjeux) }}
+                    {{ form_widget(form.conreqjeux,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.conreqjeux,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+
+                {{ form_end(form) }}
+                <div class="form-group" >
+                    <button class="btn btn-info mt-2 text-white">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

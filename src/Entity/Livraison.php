@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Livraison
  *
- * @ORM\Table(name="livraison", indexes={@ORM\Index(name="fk_foreign_key_idC", columns={"idC"})})
+ * @ORM\Table(name="livraison", indexes={@ORM\Index(name="IDX_A60C9F1F56039734", columns={"idC"})})
  * @ORM\Entity
  */
 class Livraison
@@ -22,120 +22,85 @@ class Livraison
     private $idliv;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="idC", type="integer", nullable=false)
+     * @ORM\Column(name="adressel", type="string", length=60, nullable=false)
+     */
+    private $adressel;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prixP", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prixp;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="validation", type="string", length=255, nullable=true, options={"default"="NonValide"})
+     */
+    private $validation = 'NonValide';
+
+    /**
+     * @var \Commande
+     *
+     * @ORM\ManyToOne(targetEntity="Commande")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idC", referencedColumnName="idC")
+     * })
      */
     private $idc;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomliv", type="string", length=60, nullable=false)
-     */
-    private $nomliv;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="telliv", type="integer", nullable=false)
-     */
-    private $telliv;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="fraisliv", type="integer", nullable=false)
-     */
-    private $fraisliv;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="prixltot", type="integer", nullable=false)
-     */
-    private $prixltot;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lieuxliv", type="string", length=255, nullable=false)
-     */
-    private $lieuxliv;
 
     public function getIdliv(): ?int
     {
         return $this->idliv;
     }
 
-    public function getIdc(): ?int
+    public function getAdressel(): ?string
+    {
+        return $this->adressel;
+    }
+
+    public function setAdressel(string $adressel): self
+    {
+        $this->adressel = $adressel;
+
+        return $this;
+    }
+
+    public function getPrixp(): ?float
+    {
+        return $this->prixp;
+    }
+
+    public function setPrixp(float $prixp): self
+    {
+        $this->prixp = $prixp;
+
+        return $this;
+    }
+
+    public function getValidation(): ?string
+    {
+        return $this->validation;
+    }
+
+    public function setValidation(?string $validation): self
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    public function getIdc(): ?Commande
     {
         return $this->idc;
     }
 
-    public function setIdc(int $idc): self
+    public function setIdc(?Commande $idc): self
     {
         $this->idc = $idc;
-
-        return $this;
-    }
-
-    public function getNomliv(): ?string
-    {
-        return $this->nomliv;
-    }
-
-    public function setNomliv(string $nomliv): self
-    {
-        $this->nomliv = $nomliv;
-
-        return $this;
-    }
-
-    public function getTelliv(): ?int
-    {
-        return $this->telliv;
-    }
-
-    public function setTelliv(int $telliv): self
-    {
-        $this->telliv = $telliv;
-
-        return $this;
-    }
-
-    public function getFraisliv(): ?int
-    {
-        return $this->fraisliv;
-    }
-
-    public function setFraisliv(int $fraisliv): self
-    {
-        $this->fraisliv = $fraisliv;
-
-        return $this;
-    }
-
-    public function getPrixltot(): ?int
-    {
-        return $this->prixltot;
-    }
-
-    public function setPrixltot(int $prixltot): self
-    {
-        $this->prixltot = $prixltot;
-
-        return $this;
-    }
-
-    public function getLieuxliv(): ?string
-    {
-        return $this->lieuxliv;
-    }
-
-    public function setLieuxliv(string $lieuxliv): self
-    {
-        $this->lieuxliv = $lieuxliv;
 
         return $this;
     }

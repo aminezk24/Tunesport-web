@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commande
  *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="fk_foreign_key_id", columns={"idP"})})
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="fk_idp", columns={"idP"})})
  * @ORM\Entity
  */
 class Commande
@@ -24,7 +24,7 @@ class Commande
     /**
      * @var string
      *
-     * @ORM\Column(name="adresseC", type="string", length=255, nullable=false)
+     * @ORM\Column(name="adresseC", type="string", length=60, nullable=false)
      */
     private $adressec;
 
@@ -38,7 +38,7 @@ class Commande
     /**
      * @var string
      *
-     * @ORM\Column(name="statusC", type="string", length=10, nullable=false)
+     * @ORM\Column(name="statusC", type="string", length=60, nullable=false)
      */
     private $statusc;
 

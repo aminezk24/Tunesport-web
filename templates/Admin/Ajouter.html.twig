@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h3 class="mt-5 mb-5">Create Form</h3>
+
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="form-group" >
+                    {{ form_label(form.nomevent) }}
+                    {{ form_widget(form.nomevent,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.nomevent,{'attr':{'class':'text-danger'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.datedebevent) }}
+                    {{ form_widget(form.datedebevent,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.datefinevent) }}
+                    {{ form_widget(form.datefinevent,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.descevent) }}
+                    {{ form_widget(form.descevent,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.descevent,{'attr':{'class':'text-danger'}})}}
+                </div>
+                <div class="form-group" >
+                    <button class="btn btn-info mt-2 text-white">Submit</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

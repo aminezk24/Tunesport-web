@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container">
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success mt-4 mb-b">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table", style="position: absolute; top: 100px; right: -25px">
+
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">date debut</th>
+            <th scope="col">date fin</th>
+            <th scope="col">Categorie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in evenement %}
+            <tr>
+                <th scope="row">{{ data.idEvent }}</th>
+                <td>{{ data.nomevent }}</td>
+                <td>{{ data.datedebevent|date('d/m/Y à h:i')}}</td>
+                <td>{{ data.datefinevent|date('d/m/Y à h:i') }}</td>
+                <td>{{ data.descevent }}</td>
+                <td><a class="btn btn-danger"  href="{{ path('drop',{'idevent': data.idevent  })}}">Supprimer</a></td>
+                <td><a class="btn btn-warning" href="{{ path('update',{'idevent': data.idevent })}}">Modifier</a></td>
+            </tr>
+        {% endfor %}
+        <td><a class="btn btn-primary" href="{{ path('ajouter')}}">Ajouter Evenement</a></td>
+        </tbody>
+    </table>
+
+{% endblock %}

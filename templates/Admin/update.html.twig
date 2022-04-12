@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h4 class="mt-5 mb-5">Update event</h4>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                <div class="form-group" >
+                    {{ form_label(form.nomevent) }}
+                    {{ form_widget(form.nomevent,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.datedebevent) }}
+                    {{ form_widget(form.datedebevent,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.datefinevent) }}
+                    {{ form_widget(form.datefinevent,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.descevent) }}
+                    {{ form_widget(form.descevent,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    <button class="btn btn-info mt-2 text-white">Modifier</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

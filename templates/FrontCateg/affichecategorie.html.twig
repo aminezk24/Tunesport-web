@@ -1,0 +1,53 @@
+<html lang="zxx">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>gaming</title>
+<link rel="icon" href="img/TunEsportLogo.png">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- animate CSS -->
+<link rel="stylesheet" href="css/animate.css">
+<!-- owl carousel CSS -->
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="css/all.css">
+<!-- flaticon CSS -->
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/themify-icons.css">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="css/magnific-popup.css">
+<!-- swiper CSS -->
+<link rel="stylesheet" href="css/slick.css">
+<!-- style CSS -->
+<link rel="stylesheet" href="css/style.css">
+
+
+{% block body %}
+    <div class="body_bg">
+    {% for message in app.flashes('notice') %}
+        <div class="main_menu single_page_menu">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="columns", style="position: absolute; top: 100px; right: 700px">
+
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in categorie %}
+            <tr>
+                <td>{{ data.nomcat }}</td>
+                <td>{{ data.descat }}</td>
+            </tr>
+        {% endfor %}
+        <td><a class="btn btn-warning" href="{{path('display_frontcat')}}">BACK</a></td>
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
+</html>

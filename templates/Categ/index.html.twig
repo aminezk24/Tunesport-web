@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container">
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success mt-4 mb-b">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table", style="position: absolute; top: 100px; right: -25px">
+
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in categorie %}
+            <tr>
+                <th scope="row">{{ data.idcat }}</th>
+                <td>{{ data.nomcat }}</td>
+                <td>{{ data.descat }}</td>
+                <td><a class="btn btn-danger"  href="{{ path('dropcat',{'idcat': data.idcat  })}}">Supprimer</a></td>
+                <td><a class="btn btn-warning" href="{{ path('updatecat',{'idcat': data.idcat })}}">Modifier</a></td>
+            </tr>
+        {% endfor %}
+        <td><a class="btn btn-primary" href="{{ path('ajoutercat')}}">Ajouter Categorie</a></td>
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -21,10 +22,16 @@ class Evenement
      */
     private $idEvent;
 
+
+
     /**
-     * @var string
+     * @Assert\NotBlank(message=" nomevent doit etre non vide")
+     * @Assert\Length(
+     *      min = 5,
+     *      minMessage=" Entrer un nom d'evenement au mini de 5 caracteres"
      *
-     * @ORM\Column(name="nomevent", type="string", length=30, nullable=false)
+     *     )
+     * @ORM\Column(name="nomevent" , type="string", length=255)
      */
     private $nomevent;
 
@@ -44,10 +51,15 @@ class Evenement
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="descevent", type="string", length=255, nullable=false)
+     *@Assert\NotBlank(message=" categorie doit etre non vide")
+     * @ORM\Column(name="descevent" , type="string", length=255)
      */
     private $descevent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
+     */
+    private $categorie;
 
     public function getIdEvent(): ?int
     {
@@ -98,6 +110,18 @@ class Evenement
     public function setDescevent(string $descevent): self
     {
         $this->descevent = $descevent;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

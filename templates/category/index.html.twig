@@ -3,35 +3,62 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container-fluid">
+        <h3 class="text-dark mb-4">Category</h3>
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold" style="margin: 11px;margin-bottom: 32px;">Category Info</p>
+                <a href="{{ path('app_category_index') }}">
+                    <button class="btn btn-primary" type="button" style="background: var(--bs-green);margin-top: 10px;">Create new <i class="fas fa-user-plus"></i></button>
+                </a>
+            </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>IdCat</th>
-                <th>NameCat</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.idCat }}</td>
-                <td>{{ category.nameCat }}</td>
-                <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <div class="card-body">
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="text-start">Description</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  for category in categories %}
+                            <tr>
+                                <td>
+                                    <img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/avatars/avatar6.jpeg") }}>{{ category.nameCat }}</td>
+                                <td>{{ category.descCat }}</td>
+                                <td class="text-center" style="width: 137.812px;height: 50px;">
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ path('app_category_show', {'id': category.id}) }}">
+                                            <button class="btn btn-primary" type="button"style="margin-right: 5px"><i class="far fa-check-circle"></i></button>
+                                        </a>
+                                        <a href="{{ path('app_category_edit', {'id': category.id}) }}">
+                                            <button class="btn btn-primary" type="button"><i class="far fa-edit"></i></button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7"><h2>no records found</h2></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
 
-    <a href="{{ path('app_category_new') }}">Create new</a>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

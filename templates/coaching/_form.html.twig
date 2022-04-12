@@ -1,8 +1,13 @@
-{{ form_start(form) }}
+
+{{ form_start(form,{
+    attr: {class:'form-control'}
+}) }}
     {{ form_row(form.nicknamecoa) }}
     {{ form_row(form.rankcoa) }}
-    {{ form_row(form.gamecoa) }}
+    {{ form_row(form.game) }}
     {{ form_row(form.descoa) }}
+    {{ form_row(form.category) }}
     {{ form_row(form.imagecoa) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary" style="background: var(--bs-green);margin-top: 10px;" >{{ button_label|default('Create Coach ') }}</button>
+
 {{ form_end(form) }}

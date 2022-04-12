@@ -73,7 +73,7 @@ class CoachingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('Success', 'Coach Updated! Time For A Break!');
             return $this->redirectToRoute('app_coaching_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -91,6 +91,7 @@ class CoachingController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$coaching->getIdcoa(), $request->request->get('_token'))) {
             $entityManager->remove($coaching);
             $entityManager->flush();
+            $this->addFlash('Success', 'Coach Removed! Better Get Another One Fast!');
         }
 
         return $this->redirectToRoute('app_coaching_index', [], Response::HTTP_SEE_OTHER);

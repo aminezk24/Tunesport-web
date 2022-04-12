@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}New Coaching{% endblock %}
-
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-    <h1>Create new Coaching</h1>
+    <h1>Create new Coach</h1>
 
+    <a href="{{ path('app_coaching_index') }}">
+        <button class="btn btn-primary btn-sm text-center" type="button" style="margin-right: 40px;margin-bottom: 20px;background: var(--bs-cyan);">Back To List</button>
+    </a>
     {{ include('coaching/_form.html.twig') }}
 
-    <a href="{{ path('app_coaching_index') }}">back to list</a>
+
 {% endblock %}

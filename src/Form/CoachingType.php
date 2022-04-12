@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Coaching;
 use App\Entity\Jeux;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -18,22 +19,38 @@ class CoachingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nicknamecoa',TextType::class,['attr'=>array('class'),'label'=>false,'required'=>false,])
+            ->add('nicknamecoa',TextType::class,['attr'=>array('placeholder'=> 'Enter your Nickname'),'label'=>false,'required'=>false,])
 
             ->add('rankcoa',ChoiceType::class,['choices'=> array(
                 'Gold '=>"Gold",
                 'Platinum '=>"Platinum",
                 'Diamond '=>"Diamond",
                 'Challenger '=>"Challenger"),
-                'label'=>false,'required'=>false,'placeholder'=> "Choose your rank"])
+                'label'=>false,
+                'required'=>false,
+                'placeholder'=> "Choose your rank"])
 
-            ->add('gamecoa',EntityType::class,['class'=> Jeux::class,
-                'choice_label'=> 'nomJeux',
-                'label'=>false,'required'=>false,'placeholder'=> "Choose your game"])
+            ->add('game',EntityType::class,['class'=> Jeux::class,
+                'choice_label'=> 'nomjeux',
+                'label'=>false,
+                'required'=>false,
+                'placeholder'=> "Choose your game"])
 
-            ->add('descoa', TextAreaType::class,['attr'=>array('class'),'label'=>false,'required'=>false,])
+            ->add('descoa', TextAreaType::class,[
+                'attr'=>array('placeholder'=>'Enter a Catchy Description'),
+                'label'=>false,
+                'required'=>false,])
 
-            ->add('imagecoa',FileType::class,['attr'=>array('class'),'label'=>false,'required'=>false,'mapped'=>false])
+            ->add('category',EntityType::class,['class'=> category::class,
+                'choice_label'=> 'nameCat',
+                'label'=>false,
+                'required'=>false,
+                'placeholder'=> "Choose your category"])
+
+            ->add('imagecoa',FileType::class,[
+                'label'=>false,
+                'required'=>false,
+                'mapped'=>false])
         ;
     }
 

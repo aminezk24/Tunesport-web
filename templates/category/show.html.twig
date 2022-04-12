@@ -3,28 +3,69 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>IdCat</th>
-                <td>{{ category.idCat }}</td>
-            </tr>
-            <tr>
-                <th>NameCat</th>
-                <td>{{ category.nameCat }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
 
-    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+    <div class="container-fluid">
+        <h3 class="text-left text-dark mb-4">Category Information</h3>
+        <div class="row mb-3">
 
-    {{ include('category/_delete_form.html.twig') }}
+            <div class="col-lg-8">
+                <div class="row mb-3 d-none">
+                    <div class="col">
+                        <div class="card textwhite bg-primary text-white shadow">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <p class="m-0">Peformance</p>
+                                        <p class="m-0"><strong>65.2%</strong></p>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                </div>
+                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card textwhite bg-success text-white shadow">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <p class="m-0">Peformance</p>
+                                        <p class="m-0"><strong>65.2%</strong></p>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                </div>
+                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="username"><strong>Name:</strong></label><input class="form-control" type="text" id="username" name="Nickname" disabled="" value={{ category.nameCat }}></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="email"><strong>Description:</strong></label><input class="form-control" type="text" id="username-1" name="Rank" disabled="" value={{ category.descCat }} readonly=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="text-align: left;">
+
+                                        <a href="{{ path('app_category_index') }}">
+                                            <button class="btn btn-primary btn-sm text-center" type="button" style="margin-right: 40px;background: var(--bs-cyan);">Back To List</button>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

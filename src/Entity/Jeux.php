@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,6 +21,17 @@ class Jeux
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idjeux;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Coaching", mappedBy="game")
+     */
+    private $coachings;
+
+
+    public function __construct()
+    {
+        $this->coachings = new ArrayCollection();
+    }
 
     /**
      * @var string

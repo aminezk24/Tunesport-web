@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -10,9 +11,56 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="coaching")
  * @ORM\Entity
+ * @UniqueEntity(
+ *     fields={"nicknamecoa"},
+ *     message="This Nickname Already Exists!"
+ * )
  */
 class Coaching
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="coachings")
+     */
+    private $category;
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Jeux", inversedBy="coachings")
+     * @ORM\JoinColumn(name="idjeux", referencedColumnName="idjeux")
+     */
+    private $game ;
+
+    /**
+     * @return mixed
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param mixed $game
+     */
+    public function setGame($game): void
+    {
+        $this->game = $game;
+    }
 
 
     /**
@@ -29,6 +77,12 @@ class Coaching
      *
      * @ORM\Column(name="nicknameCoa", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Enter Your Nickname Please!")
+     * @Assert\Length(
+     *     min= 3,
+     *     max= 10,
+     *     minMessage="Too Short For A Nickname!",
+     *     maxMessage="Too Long For A Nickname!"
+     * )
      */
     private $nicknamecoa;
 
@@ -39,13 +93,6 @@ class Coaching
      */
     private $rankcoa;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="gameCoa", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="Enter Your Game Please!")
-     */
-    private $gamecoa;
 
     /**
      * @var string
@@ -58,7 +105,14 @@ class Coaching
     /**
      * @var string|null
      *
-     * @ORM\Column(name="imageCoa", type="string", length=255, nullable=false)
+     * @ORM\Column(name="imageCoa", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min= 10,
+     *     max= 100,
+     *     minMessage="Too Short For A Description!",
+     *     maxMessage="Too Long For A Description!"
+     * )
      */
     private $imagecoa;
 
@@ -91,17 +145,6 @@ class Coaching
         return $this;
     }
 
-    public function getGamecoa(): ?string
-    {
-        return $this->gamecoa;
-    }
-
-    public function setGamecoa(string $gamecoa): self
-    {
-        $this->gamecoa = $gamecoa;
-
-        return $this;
-    }
 
     public function getDescoa(): ?string
     {

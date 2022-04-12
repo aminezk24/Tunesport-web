@@ -3,40 +3,80 @@
 {% block title %}Coaching{% endblock %}
 
 {% block body %}
-    <h1>Coaching</h1>
+    <div class="container-fluid">
+        <h3 class="text-center text-dark mb-4">Coach Information</h3>
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3" style="margin-top: 0px;">
+                    <div class="card-body text-center shadow" style="height: 251px;"><img class="rounded-circle mb-3 mt-4" src={{ asset('assets/img/dogs/image2.jpeg') }} width="160" height="160"></div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row mb-3 d-none">
+                    <div class="col">
+                        <div class="card textwhite bg-primary text-white shadow">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <p class="m-0">Peformance</p>
+                                        <p class="m-0"><strong>65.2%</strong></p>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                </div>
+                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card textwhite bg-success text-white shadow">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <p class="m-0">Peformance</p>
+                                        <p class="m-0"><strong>65.2%</strong></p>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                </div>
+                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="username"><strong>Nickname:</strong></label><input class="form-control" type="text" id="username" name="Nickname" disabled="" value={{ coaching.nicknamecoa }}></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="email"><strong>Rank:</strong></label><input class="form-control" type="text" id="username-1" name="Rank" disabled="" value={{ coaching.rankcoa }} readonly=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="first_name"><strong>Game:</strong></label><input class="form-control" type="text" id="first_name" name="Game" disabled="" value={{ coaching.gamecoa }} readonly=""></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="last_name"><strong>Description:</strong></label><input class="form-control" type="text" id="last_name" name="Description" disabled="" value={{ coaching.descoa }} readonly=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="text-align: left;">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Idcoa</th>
-                <td>{{ coaching.idcoa }}</td>
-            </tr>
-            <tr>
-                <th>Nicknamecoa</th>
-                <td>{{ coaching.nicknamecoa }}</td>
-            </tr>
-            <tr>
-                <th>Rankcoa</th>
-                <td>{{ coaching.rankcoa }}</td>
-            </tr>
-            <tr>
-                <th>Gamecoa</th>
-                <td>{{ coaching.gamecoa }}</td>
-            </tr>
-            <tr>
-                <th>Descoa</th>
-                <td>{{ coaching.descoa }}</td>
-            </tr>
-            <tr>
-                <th>Imagecoa</th>
-                <td>{{ coaching.imagecoa }}</td>
-            </tr>
-        </tbody>
-    </table>
+                                        <a href="{{ path('app_coaching_index') }}">
+                                            <button class="btn btn-primary btn-sm text-center" type="button" style="margin-right: 40px;background: var(--bs-cyan);">Back To List</button>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_coaching_index') }}">back to list</a>
 
-    <a href="{{ path('app_coaching_edit', {'idcoa': coaching.idcoa}) }}">edit</a>
-
-    {{ include('coaching/_delete_form.html.twig') }}
 {% endblock %}

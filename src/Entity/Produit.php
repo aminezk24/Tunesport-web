@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +12,26 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Produit
 {
+/**
+* @ORM\ManyToOne(targetEntity="App\Entity\Categorieproduit", inversedBy="produits")
+*/
+    private $categorieproduit;
+
+/**
+* @return mixed
+*/
+    public function getCategorieProduit()
+    {
+        return $this->categorieproduit;
+    }
+
+    /**
+     * @param mixed $categorieproduit
+     */
+    public function setCategorieProduit($categorieproduit): void
+    {
+        $this->categorieproduit = $categorieproduit;
+    }
     /**
      * @var int
      *
@@ -25,6 +45,8 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="nomP", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="votre nom est vide")
+     * Assert\type("string")
      */
     private $nomp;
 
@@ -32,6 +54,8 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="prixP", type="integer", nullable=false)
+     *@Assert\Type("numeric")
+     *@Assert\NotBlank(message="prix est integer")
      */
     private $prixp;
 
@@ -39,6 +63,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="descP", type="string", length=255, nullable=false)
+     * @Assert\NotBlank
      */
     private $descp;
 
@@ -46,6 +71,9 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="dispoP", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="")
+     * @Assert\Choice({"disponible", "nondisponible"})
+     *@Assert\NotBlank(message="vous n'avez rien choisi")
      */
     private $dispop;
 
@@ -53,6 +81,9 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="couleurP", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="")
+     * @Assert\Choice({"rouge", "bleu","noir","gris","marron"})
+     *@Assert\NotBlank(message="vous n'avez rien choisi")
      */
     private $couleurp;
 
@@ -60,6 +91,7 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="quantiteP", type="integer", nullable=false)
+     *@Assert\NotBlank
      */
     private $quantitep;
 
@@ -67,6 +99,9 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="tailleP", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="")
+     * @Assert\Choice({"s", "m","l","xl","xxl"})
+     *@Assert\NotBlank(message="vous n'avez rien choisi")
      */
     private $taillep;
 

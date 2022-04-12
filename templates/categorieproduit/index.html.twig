@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorieproduit index{% endblock %}
+
+{% block body %}
+    <div class="card-header py-3">
+        <p class="text-primary m-0 fw-bold" style="margin: 11px;margin-bottom: 32px;">categories Info</p>
+        <a href="{{ path('app_categorieproduit_new') }}">
+            <button class="btn btn-primary" type="button" style="background: var(--bs-green);margin-top: 10px;">Create new <i class="fas fa-user-plus"></i></button>
+        </a>
+    </div>
+    <h1>Categorieproduit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomCP</th>
+                <th>DescCP</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieproduit in categorieproduits %}
+            <tr>
+                <td>{{ categorieproduit.id }}</td>
+                <td>{{ categorieproduit.nomCP }}</td>
+                <td>{{ categorieproduit.descCP }}
+
+                <td class="text-center" style="width: 137.812px;height: 50px;">
+                    <div class="btn-group" role="group">
+                        <a href="{{ path('app_categorieproduit_show', {'id': categorieproduit.id}) }}">
+                            <button class="btn btn-primary" type="button"style="margin-right: 5px"><i class="far fa-check-circle"></i></button>
+                        </a>
+                        <a href="{{ path('app_categorieproduit_edit', {'id': categorieproduit.id}) }}">
+                            <button class="btn btn-primary" type="button"><i class="far fa-edit"></i></button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

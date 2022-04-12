@@ -49,58 +49,5 @@ class Article
      */
     private $imageArticle;
 
-    public function getIdArticle(): ?int
-    {
-        return $this->idArticle;
-    }
-
-    public function getTitreArticle(): ?string
-    {
-        return $this->titreArticle;
-    }
-
-    public function setTitreArticle(string $titreArticle): self
-    {
-        $this->titreArticle = $titreArticle;
-
-        return $this;
-    }
-
-    public function getDescriptionArticle(): ?string
-    {
-        return $this->descriptionArticle;
-    }
-
-    public function setDescriptionArticle(string $descriptionArticle): self
-    {
-        $this->descriptionArticle = $descriptionArticle;
-
-        return $this;
-    }
-
-    public function getDateArticle(): ?\DateTimeInterface
-    {
-        return $this->dateArticle;
-    }
-
-    public function setDateArticle(\DateTimeInterface $dateArticle): self
-    {
-        $this->dateArticle = $dateArticle;
-
-        return $this;
-    }
-
-    public function getImageArticle(): ?string
-    {
-        return $this->imageArticle;
-    }
-
-    public function setImageArticle(string $imageArticle): self
-    {
-        $this->imageArticle = $imageArticle;
-
-        return $this;
-    }
-
 
 }

@@ -49,58 +49,5 @@ class Commentaires
      */
     private $idArt;
 
-    public function getIdCommentaire(): ?int
-    {
-        return $this->idCommentaire;
-    }
-
-    public function getTitreCommentaire(): ?string
-    {
-        return $this->titreCommentaire;
-    }
-
-    public function setTitreCommentaire(string $titreCommentaire): self
-    {
-        $this->titreCommentaire = $titreCommentaire;
-
-        return $this;
-    }
-
-    public function getContenuCommentaire(): ?string
-    {
-        return $this->contenuCommentaire;
-    }
-
-    public function setContenuCommentaire(string $contenuCommentaire): self
-    {
-        $this->contenuCommentaire = $contenuCommentaire;
-
-        return $this;
-    }
-
-    public function getDateCommentaire(): ?\DateTimeInterface
-    {
-        return $this->dateCommentaire;
-    }
-
-    public function setDateCommentaire(\DateTimeInterface $dateCommentaire): self
-    {
-        $this->dateCommentaire = $dateCommentaire;
-
-        return $this;
-    }
-
-    public function getIdArt(): ?int
-    {
-        return $this->idArt;
-    }
-
-    public function setIdArt(int $idArt): self
-    {
-        $this->idArt = $idArt;
-
-        return $this;
-    }
-
 
 }

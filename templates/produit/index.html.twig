@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit Table{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container-fluid">
+        <h3 class="text-dark mb-4">Produits</h3>
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold" style="margin: 11px;margin-bottom: 32px;">Produits Info</p>
+                <a href="{{ path('app_produit_new') }}">
+                    <button class="btn btn-primary" type="button" style="background: var(--bs-green);margin-top: 10px;">Create new <i class="fas fa-user-plus"></i></button>
+                </a>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                        <tr>
+                            <th>nomp</th>
+                            <th class="text-start">prixp</th>
+                            <th class="text-start">descp</th>
+                            <th class="text-start">dispop</th>
+                            <th class="text-start">couleurp</th>
+                            <th class="text-start">quantitep</th>
+                            <th class="text-start">taileep</th>
+                            <th class="text-start">nomCP</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  for produit in produits %}
+                            <tr>
+                                <td><img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/avatars/avatar5.jpeg") }}>{{ produit.nomp }}</td>
+                                <td>{{ produit.prixp }}</td>
+                                <td>{{ produit.descp }}</td>
+                                <td>{{ produit.dispop }}</td>
+                                <td>{{ produit.couleurp }}</td>
+                                <td>{{ produit.quantitep }}</td>
+                                <td>{{ produit.taillep }}</td>
+                                <td>{{ produit.categorieproduit.nomCP }}</td>
+                                <td class="text-center" style="width: 137.812px;height: 50px;">
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ path('app_produit_show', {'idp': produit.idp}) }}">
+                                            <button class="btn btn-primary" type="button"style="margin-right: 5px"><i class="far fa-check-circle"></i></button>
+                                        </a>
+                                        <a href="{{ path('app_produit_edit', {'idp': produit.idp}) }}">
+                                            <button class="btn btn-primary" type="button"><i class="far fa-edit"></i></button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7"><h2>no records found</h2></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

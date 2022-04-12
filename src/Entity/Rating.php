@@ -22,6 +22,20 @@ class Rating
     private $idrat;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="titleRat", type="string", length=20, nullable=false)
+     */
+    private $titlerat;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateRat", type="date", nullable=false)
+     */
+    private $daterat;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="valueRat", type="integer", nullable=false)
@@ -41,47 +55,6 @@ class Rating
      * @ORM\Column(name="idCoa", type="integer", nullable=false)
      */
     private $idcoa;
-
-    public function getIdrat(): ?int
-    {
-        return $this->idrat;
-    }
-
-    public function getValuerat(): ?int
-    {
-        return $this->valuerat;
-    }
-
-    public function setValuerat(int $valuerat): self
-    {
-        $this->valuerat = $valuerat;
-
-        return $this;
-    }
-
-    public function getIdcli(): ?int
-    {
-        return $this->idcli;
-    }
-
-    public function setIdcli(int $idcli): self
-    {
-        $this->idcli = $idcli;
-
-        return $this;
-    }
-
-    public function getIdcoa(): ?int
-    {
-        return $this->idcoa;
-    }
-
-    public function setIdcoa(int $idcoa): self
-    {
-        $this->idcoa = $idcoa;
-
-        return $this;
-    }
 
 
 }

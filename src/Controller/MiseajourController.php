@@ -90,6 +90,15 @@ class MiseajourController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    /**
+     * @Route("/affichemise", name="display_affichemise")
+     */
+    public function indexFront(): Response
+    {
+        $data = $this->getDoctrine()->getRepository(Miseajour::class)->findAll();
+        return $this->render('Frontjeux/affichemise.html.twig',
+            ['mise' => $data]);
+    }
 
 
 

@@ -81,7 +81,9 @@
                             <th scope="col">Taille</th>
                             <th scope="col">Description</th>
                             <th scope="col">Platforme disponible</th>
-                            <th scope="col">CSonfiguration requise</th>
+                            <th scope="col">Configuration requise</th>
+                            <th scope="col">Image jeux</th>
+
 
 
 
@@ -98,6 +100,8 @@
                                 <td>{{ data.descjeux }}</td>
                                 <td>{{ data.platdispojeux }}</td>
                                 <td>{{ data.conreqjeux }}</td>
+                                <td>{{ data.imageJ }}</td>
+
                                 <td><a class="btn btn-danger"  href="{{ path('drop',{'idjeux': data.idjeux  })}}">Supprimer</a></td>
                                 <td><a class="btn btn-warning" href="{{ path('update',{'idjeux': data.idjeux })}}">Modifier</a></td>
 
@@ -128,7 +132,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>TunEsport</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->

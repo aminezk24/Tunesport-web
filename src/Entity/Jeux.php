@@ -99,6 +99,21 @@ class Jeux
      */
     private $conreqjeux;
 
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="imageJ", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min= 10,
+     *     max= 100,
+     *     minMessage="Too Short For A Description!",
+     *     maxMessage="Too Long For A Description!"
+     * )
+     */
+    private $imageJ;
+
     /**
      * @ORM\OneToMany(targetEntity=Miseajour::class, mappedBy="Jeux")
      */
@@ -184,6 +199,18 @@ class Jeux
     public function setConreqjeux(string $conreqjeux): self
     {
         $this->conreqjeux = $conreqjeux;
+
+        return $this;
+    }
+
+    public function getImageJ(): ?string
+    {
+        return $this->imageJ;
+    }
+
+    public function setImageJ(?string $imageJ): self
+    {
+        $this->imageJ = $imageJ;
 
         return $this;
     }

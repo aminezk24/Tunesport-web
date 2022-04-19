@@ -43,12 +43,12 @@
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="index.html">
+                        <a href="{{ path('display_admin')}}">
                             <i class="bi bi-circle"></i><span>Jeux</span>
                         </a>
                     </li>
                     <li>
-                        <a href="index.html.twig">
+                        <a href={{ path('display_adminM')}}>
                             <i class="bi bi-circle"></i><span>Mise A Jour</span>
                         </a>
                     </li>
@@ -100,11 +100,8 @@
                                 <td>{{ data.taillemise }}</td>
                                 <td>{{ data.descmise }}</td>
                                 <td>{{ data.jeux.idjeux }}</td>
-
-
                                 <td><a class="btn btn-danger"  href="{{ path('dropm',{'id': data.id  })}}">Supprimer</a></td>
                                 <td><a class="btn btn-warning" href="{{ path('updatem',{'id': data.id})}}">Modifier</a></td>
-
 
 
                             </tr>

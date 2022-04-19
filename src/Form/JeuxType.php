@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Jeux;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,6 +19,7 @@ class JeuxType extends AbstractType
             ->add('descjeux')
             ->add('platdispojeux')
             ->add('conreqjeux')
+            ->add('imageJ', FileType::class , [ 'mapped'=> false])
 
         ;
     }

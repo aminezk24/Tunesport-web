@@ -163,9 +163,5 @@ class Miseajour
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->getNomjeu();
-    }
 
 }

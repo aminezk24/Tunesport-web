@@ -52,58 +52,5 @@ class Livraison
      */
     private $idc;
 
-    public function getIdliv(): ?int
-    {
-        return $this->idliv;
-    }
-
-    public function getAdressel(): ?string
-    {
-        return $this->adressel;
-    }
-
-    public function setAdressel(string $adressel): self
-    {
-        $this->adressel = $adressel;
-
-        return $this;
-    }
-
-    public function getPrixp(): ?float
-    {
-        return $this->prixp;
-    }
-
-    public function setPrixp(float $prixp): self
-    {
-        $this->prixp = $prixp;
-
-        return $this;
-    }
-
-    public function getValidation(): ?string
-    {
-        return $this->validation;
-    }
-
-    public function setValidation(?string $validation): self
-    {
-        $this->validation = $validation;
-
-        return $this;
-    }
-
-    public function getIdc(): ?Commande
-    {
-        return $this->idc;
-    }
-
-    public function setIdc(?Commande $idc): self
-    {
-        $this->idc = $idc;
-
-        return $this;
-    }
-
 
 }

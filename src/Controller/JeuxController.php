@@ -43,6 +43,17 @@ class JeuxController extends AbstractController
         $form = $this->createForm(JeuxType::class, $jeux);
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()){
+            $file = $request->files->get('jeux')['imageJ'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $filename=md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move(
+                $uploads_directory,
+                $filename
+            );
+            $jeux->setImageJ($filename);
+            /*echo "<pre>";
+            var_dump($file);
+            die;*/
             $em = $this->getDoctrine()->getManager();
             $em->persist($jeux);
             $em->flush();
@@ -86,4 +97,24 @@ class JeuxController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/frontjeux", name="display_frontjeux")
+     */
+    public function indexFrontadmin(): Response
+    {
+        $data = $this->getDoctrine()->getRepository(Jeux::class)->findAll();
+        return $this->render('Frontjeux/index.html.twig',
+            ['jeux' => $data]);
+    }
+
+    /**
+     * @Route("/affichejeux", name="display_affichejeux")
+     */
+    public function indexFront(): Response
+    {
+        $data = $this->getDoctrine()->getRepository(Jeux::class)->findAll();
+        return $this->render('Frontjeux/affiche.html.twig',
+            ['jeux' => $data]);
+    }
 }

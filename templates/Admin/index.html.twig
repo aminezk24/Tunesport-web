@@ -17,6 +17,7 @@
             <th scope="col">date debut</th>
             <th scope="col">date fin</th>
             <th scope="col">Categorie</th>
+            <th scope="col">Image</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                 <td>{{ data.datedebevent|date('d/m/Y à h:i')}}</td>
                 <td>{{ data.datefinevent|date('d/m/Y à h:i') }}</td>
                 <td>{{ data.descevent }}</td>
+                <td>{{ data.imageE }}</td>
                 <td><a class="btn btn-danger"  href="{{ path('drop',{'idevent': data.idevent  })}}">Supprimer</a></td>
                 <td><a class="btn btn-warning" href="{{ path('update',{'idevent': data.idevent })}}">Modifier</a></td>
             </tr>

@@ -6,6 +6,7 @@ use App\Entity\Categorie;
 use App\Entity\Evenement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,6 +23,7 @@ class EvenementType extends AbstractType
                 'label'=>false,
                 'required'=>false,
                 'placeholder'=> "Choose your categories"])
+            ->add('imageE', FileType::class , [ 'mapped'=> false])
 
         ;
     }

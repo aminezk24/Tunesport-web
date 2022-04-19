@@ -45,6 +45,17 @@ class EvenController extends AbstractController
         $form = $this->createForm(EvenementType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()){
+            $file = $request->files->get('evenement')['imageE'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $filename=md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move(
+                $uploads_directory,
+                $filename
+            );
+            $event->setImageE($filename);
+            /*echo "<pre>";
+            var_dump($file);
+            die;*/
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();

@@ -25,6 +25,12 @@
                     {{ form_errors(form.descevent,{'attr':{'class':'text-danger'}})}}
                 </div>
                 <div class="form-group" >
+                    {{ form_label(form.imageE) }}
+                    {{ form_widget(form.imageE,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.imageE,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
                     <button class="btn btn-info mt-2 text-white">Submit</button>
                 </div>
                 {{ form_end(form) }}

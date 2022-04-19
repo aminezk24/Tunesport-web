@@ -61,6 +61,21 @@ class Evenement
      */
     private $categorie;
 
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="imageE", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min= 10,
+     *     max= 100,
+     *     minMessage="Too Short For A Description!",
+     *     maxMessage="Too Long For A Description!"
+     * )
+     */
+    private $imageE;
+
     public function getIdEvent(): ?int
     {
         return $this->idEvent;
@@ -122,6 +137,18 @@ class Evenement
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getImageE(): ?string
+    {
+        return $this->imageE;
+    }
+
+    public function setImageE(?string $imageE): self
+    {
+        $this->imageE = $imageE;
 
         return $this;
     }

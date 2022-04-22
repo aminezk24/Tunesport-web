@@ -1,0 +1,52 @@
+{% extends 'baseClient.html.twig' %}
+
+{% block title %}Coaching Table{% endblock %}
+
+{% block body %}
+    <div class="container" id="card-1" style="margin-bottom: 26px;">
+        <h1 style="margin-bottom: 25px;">Categories</h1>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col">
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{ category.namecat }}</label></div>
+            </div>
+            {% else %}
+                <h2>no records found</h2>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container" id="card">
+        <h1 style="margin-bottom: 25px;">Coaches</h1>
+
+        <div class="row" style="width: 854px;">
+            {% for coaching in coachings %}
+                <div class="col-sm-6 col-lg-4 bounce animated">
+                    <div class="card text-center clean-card" style="background: var(--bs-info);font-family: Montserrat, sans-serif;color: var(--bs-light);border-radius: 10px;"><img class="img-fluid card-img-top w-100 d-block border-dark shadow-sm" src="{{ asset("assets/img/")~coaching.imagecoa }}" style="padding: 16px;">
+                        <div class="card-body info">
+                            <h4 class="card-title">{{ coaching.nicknamecoa }} </h4>
+                            <div class="row">
+                                <div class="col">
+                                    <h6>{{ coaching.rankcoa }}</h6>
+                                </div>
+                                <div class="col">
+                                    <h6>{{ coaching.game.nomjeux }}</h6>
+                                </div>
+                            </div>
+                            <p class="card-text">Description: {{ coaching.descoa }}</p>
+                            <div class="icons">
+                                <div class="row">
+                                    <div class="col">
+                                        <p></p>
+                                    </div>
+                                    <div class="col"><a href="#" style="font-size: 31px;"><i class="fas fa-chevron-circle-right" data-bss-hover-animate="jello" style="color: var(--bs-light);"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <h2>no records found</h2>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

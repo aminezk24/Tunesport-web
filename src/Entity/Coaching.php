@@ -21,6 +21,7 @@ class Coaching
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="coachings")
+     * @Assert\NotBlank(message="Enter Your Category Please!")
      */
     private $category;
 
@@ -43,6 +44,7 @@ class Coaching
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Jeux", inversedBy="coachings")
      * @ORM\JoinColumn(name="idjeux", referencedColumnName="idjeux")
+     * @Assert\NotBlank(message="Enter Your Game Please!")
      */
     private $game ;
 
@@ -56,6 +58,7 @@ class Coaching
 
     /**
      * @param mixed $game
+     *
      */
     public function setGame($game): void
     {
@@ -106,13 +109,8 @@ class Coaching
      * @var string|null
      *
      * @ORM\Column(name="imageCoa", type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(
-     *     min= 10,
-     *     max= 100,
-     *     minMessage="Too Short For A Description!",
-     *     maxMessage="Too Long For A Description!"
      * )
+     *
      */
     private $imagecoa;
 

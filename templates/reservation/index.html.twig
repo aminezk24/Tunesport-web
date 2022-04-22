@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idres</th>
+                <th>Dateres</th>
+                <th>Heureres</th>
+                <th>Dispores</th>
+                <th>Prixres</th>
+                <th>Idcli</th>
+                <th>Idcoa</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.idres }}</td>
+                <td>{{ reservation.dateres ? reservation.dateres|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.heureres ? reservation.heureres|date('H:i:s') : '' }}</td>
+                <td>{{ reservation.dispores }}</td>
+                <td>{{ reservation.prixres }}</td>
+                <td>{{ reservation.idcli }}</td>
+                <td>{{ reservation.idcoa }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'idres': reservation.idres}) }}">show</a>
+                    <a href="{{ path('app_reservation_edit', {'idres': reservation.idres}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_new') }}">Create new</a>
+    {{ include('calendar/calendar.html.twig') }}
+{% endblock %}

@@ -82,8 +82,38 @@
     "egulias/email-validator": {
         "version": "3.1.2"
     },
+    "firebase/php-jwt": {
+        "version": "v3.0.0"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
+    },
+    "google/apiclient": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "49c5d7a66d863d28513979bf0666dc77599100c0"
+        },
+        "files": [
+            "./config/packages/google_apiclient.yaml"
+        ]
+    },
+    "google/apiclient-services": {
+        "version": "v0.244.0"
+    },
+    "google/auth": {
+        "version": "v0.8"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.2.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.2.3"
     },
     "laminas/laminas-code": {
         "version": "4.5.1"
@@ -111,6 +141,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.6.1"
+    },
+    "phpseclib/phpseclib": {
+        "version": "2.0.37"
     },
     "phpspec/prophecy": {
         "version": "v1.15.0"
@@ -149,6 +182,9 @@
     },
     "psr/container": {
         "version": "1.1.2"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
@@ -215,6 +251,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "stripe/stripe-php": {
+        "version": "v7.124.0"
     },
     "symfony/asset": {
         "version": "v4.4.40"
@@ -573,6 +612,18 @@
     "symfony/yaml": {
         "version": "v4.4.37"
     },
+    "tattali/calendar-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.1",
+            "ref": "0c643e17b5340747b35c2c75e11727fa31bfa9bb"
+        },
+        "files": [
+            "./config/routes/calendar.yaml"
+        ]
+    },
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
@@ -581,6 +632,9 @@
     },
     "twig/twig": {
         "version": "v3.3.10"
+    },
+    "twilio/sdk": {
+        "version": "6.36.1"
     },
     "webmozart/assert": {
         "version": "1.10.0"

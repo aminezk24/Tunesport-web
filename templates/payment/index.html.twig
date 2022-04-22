@@ -1,0 +1,16 @@
+{% extends 'baseclient.html.twig' %}
+
+{% block title %}Make Payment{% endblock %}
+
+{% block body %}
+
+    {# {{ include('coaching/show.html.twig') }} #}
+
+    <form action="/checkout" method="POST">
+        <button type="submit" class="btn btn-primary btn-lg">Checkout</button>
+    </form>
+
+    <div>
+
+    </div>
+{% endblock %}

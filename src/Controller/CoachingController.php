@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Coaching;
 use App\Form\CoachingType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,24 @@ class CoachingController extends AbstractController
     }
 
     /**
+     * @Route("/coaches", name="app_coaching_indexfrontend", methods={"GET"})
+     */
+    public function indexfrontend(EntityManagerInterface $entityManager): Response
+    {
+        $coachings = $entityManager
+            ->getRepository(Coaching::class)
+            ->findAll();
+        $categories = $entityManager
+            ->getRepository(Category::class)
+            ->findAll();
+
+
+        return $this->render('coaching/indexfrontend.html.twig', [
+            'coachings' => $coachings,'categories'=>$categories
+        ]);
+    }
+
+    /**
      * @Route("/new", name="app_coaching_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -39,10 +58,15 @@ class CoachingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $request->files->get('coaching')['imagecoa'];
+            $uploads_directory= $this->getParameter('uploads_directory');
+            $filename= md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($uploads_directory,$filename);
+            $coaching->setImagecoa($filename);
             $entityManager->persist($coaching);
             $entityManager->flush();
 
-            $this->addFlash('Success', 'Coach Created! Time To Set Up Reservations');
+            $this->addFlash('Success', 'coach Created! Time To Set Up Reservations');
 
             return $this->redirectToRoute('app_coaching_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,7 +97,7 @@ class CoachingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('Success', 'Coach Updated! Time For A Break!');
+
             return $this->redirectToRoute('app_coaching_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -91,7 +115,7 @@ class CoachingController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$coaching->getIdcoa(), $request->request->get('_token'))) {
             $entityManager->remove($coaching);
             $entityManager->flush();
-            $this->addFlash('Success', 'Coach Removed! Better Get Another One Fast!');
+
         }
 
         return $this->redirectToRoute('app_coaching_index', [], Response::HTTP_SEE_OTHER);

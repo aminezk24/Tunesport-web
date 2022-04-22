@@ -3,12 +3,12 @@
 {% block title %}Coaching Table{% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
     <div class="container-fluid">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h3 class="text-dark mb-4">Coaches</h3>
         <div class="card shadow">
             <div class="card-header py-3">
@@ -34,7 +34,7 @@
                         <tbody>
                         {%  for coaching in coachings %}
                         <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/avatars/avatar5.jpeg") }}>{{ coaching.nicknamecoa }}</td>
+                            <td><img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/")~coaching.imagecoa }}>{{ coaching.nicknamecoa }}</td>
                             <td>{{ coaching.rankcoa }}</td>
                             <td>{{ coaching.game.nomjeux }}</td>
                             <td>{{ coaching.descoa }}</td>

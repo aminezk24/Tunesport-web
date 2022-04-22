@@ -13,7 +13,7 @@
         <div class="card shadow">
             <div class="card-header py-3">
                 <p class="text-primary m-0 fw-bold" style="margin: 11px;margin-bottom: 32px;">Category Info</p>
-                <a href="{{ path('app_category_index') }}">
+                <a href="{{ path('app_category_new') }}">
                     <button class="btn btn-primary" type="button" style="background: var(--bs-green);margin-top: 10px;">Create new <i class="fas fa-user-plus"></i></button>
                 </a>
             </div>
@@ -32,7 +32,7 @@
                         {%  for category in categories %}
                             <tr>
                                 <td>
-                                    <img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/avatars/avatar6.jpeg") }}>{{ category.nameCat }}</td>
+                                    <img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/dogs/r.jpeg") }} alt="">{{ category.nameCat }}</td>
                                 <td>{{ category.descCat }}</td>
                                 <td class="text-center" style="width: 137.812px;height: 50px;">
                                     <div class="btn-group" role="group">

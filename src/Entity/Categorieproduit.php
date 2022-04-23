@@ -2,103 +2,67 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieproduitRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategorieproduitRepository::class)
+ * Categorieproduit
+ *
+ * @ORM\Table(name="categorieproduit")
+ * @ORM\Entity
  */
 class Categorieproduit
 {
-
-
-
-
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="nom_cp", type="string", length=255, nullable=false)
      */
-    private $nomCP;
+    private $nomCp;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="desc_cp", type="string", length=255, nullable=false)
      */
-    private $descCP;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorieproduit")
-     */
-    private $produits;
-
-    public function __construct()
-    {
-        $this->produits = new ArrayCollection();
-    }
+    private $descCp;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomCP(): ?string
+    public function getNomCp(): ?string
     {
-        return $this->nomCP;
+        return $this->nomCp;
     }
 
-    public function setNomCP(string $nomCP): self
+    public function setNomCp(string $nomCp): self
     {
-        $this->nomCP = $nomCP;
+        $this->nomCp = $nomCp;
 
         return $this;
     }
 
-    public function getDescCP(): ?string
+    public function getDescCp(): ?string
     {
-        return $this->descCP;
+        return $this->descCp;
     }
 
-    public function setDescCP(string $descCP): self
+    public function setDescCp(string $descCp): self
     {
-        $this->descCP = $descCP;
+        $this->descCp = $descCp;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produit>
-     */
-    public function getProduits(): Collection
-    {
-        return $this->produits;
-    }
 
-    public function addProduit(Produit $produit): self
-    {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->setCategorieproduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduit(Produit $produit): self
-    {
-        if ($this->produits->removeElement($produit)) {
-            // set the owning side to null (unless already changed)
-            if ($produit->getCategorieproduit() === $this) {
-                $produit->setCategorieproduit(null);
-            }
-        }
-
-        return $this;
-    }
 }

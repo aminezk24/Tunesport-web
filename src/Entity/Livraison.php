@@ -63,5 +63,82 @@ class Livraison
      */
     private $lieuxliv;
 
+    public function getIdliv(): ?int
+    {
+        return $this->idliv;
+    }
+
+    public function getIdc(): ?int
+    {
+        return $this->idc;
+    }
+
+    public function setIdc(int $idc): self
+    {
+        $this->idc = $idc;
+
+        return $this;
+    }
+
+    public function getNomliv(): ?string
+    {
+        return $this->nomliv;
+    }
+
+    public function setNomliv(string $nomliv): self
+    {
+        $this->nomliv = $nomliv;
+
+        return $this;
+    }
+
+    public function getTelliv(): ?int
+    {
+        return $this->telliv;
+    }
+
+    public function setTelliv(int $telliv): self
+    {
+        $this->telliv = $telliv;
+
+        return $this;
+    }
+
+    public function getFraisliv(): ?int
+    {
+        return $this->fraisliv;
+    }
+
+    public function setFraisliv(int $fraisliv): self
+    {
+        $this->fraisliv = $fraisliv;
+
+        return $this;
+    }
+
+    public function getPrixltot(): ?int
+    {
+        return $this->prixltot;
+    }
+
+    public function setPrixltot(int $prixltot): self
+    {
+        $this->prixltot = $prixltot;
+
+        return $this;
+    }
+
+    public function getLieuxliv(): ?string
+    {
+        return $this->lieuxliv;
+    }
+
+    public function setLieuxliv(string $lieuxliv): self
+    {
+        $this->lieuxliv = $lieuxliv;
+
+        return $this;
+    }
+
 
 }

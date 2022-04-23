@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\Utilisateur;
+use App\Form\Categorieproduit1Type;
+use App\Entity\Favoris;
+
 use App\Form\ProduitType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +43,18 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            // On boucle sur les images
+            foreach($image as $ima){
+                $fichier = md5(uniqid()) . '.' . $ima->guessExtension();
+
+                $ima->move(
+                    $this->getParameter('img_directory'),
+                    $fichier
+                );
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $produit->setImage($fichier);
             $entityManager->persist($produit);
             $entityManager->flush();
 
@@ -93,4 +109,44 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
-}
+
+
+
+
+    /**
+     * @Route("/addfavoris/{id}", name="add_favoris_produit")
+     */
+    public function addparticipation(Request $request,$id): Response
+    {
+        $User = new Utilisateur();
+        $Produit = new Produit();
+        $User = $this->getDoctrine()->getRepository(Utilisateur::class)->find(112);
+        $Produit = $this->getDoctrine()->getRepository(Produit::class)->find($id);
+        $User->addIdp($Produit);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($User);
+        $em->flush();
+        return $this->redirectToRoute("app_frontproduit");
+    }
+
+    /**
+     * @Route("/front/new/mylist", name="app_participation_indexq", methods={"GET"})
+     */
+    public function indexq(EntityManagerInterface $entityManager): Response
+    {
+        {
+            $users = $entityManager
+                ->getRepository(Utilisateur::class)
+                ->findBy(array('id' => '112'));
+
+            return $this->render('Favoris/indexfront.html.twig', [
+                'users' => $users,
+            ]);
+        }
+
+    }
+
+
+    }

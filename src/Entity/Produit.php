@@ -1,37 +1,19 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Produit
  *
- * @ORM\Table(name="produit")
+ * @ORM\Table(name="produit", indexes={@ORM\Index(name="fk_foreign_key_idCP", columns={"categorieproduit_id"})})
  * @ORM\Entity
  */
 class Produit
 {
-/**
-* @ORM\ManyToOne(targetEntity="App\Entity\Categorieproduit", inversedBy="produits")
-*/
-    private $categorieproduit;
-
-/**
-* @return mixed
-*/
-    public function getCategorieProduit()
-    {
-        return $this->categorieproduit;
-    }
-
-    /**
-     * @param mixed $categorieproduit
-     */
-    public function setCategorieProduit($categorieproduit): void
-    {
-        $this->categorieproduit = $categorieproduit;
-    }
     /**
      * @var int
      *
@@ -45,8 +27,6 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="nomP", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="votre nom est vide")
-     * Assert\type("string")
      */
     private $nomp;
 
@@ -54,8 +34,6 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="prixP", type="integer", nullable=false)
-     *@Assert\Type("numeric")
-     *@Assert\NotBlank(message="prix est integer")
      */
     private $prixp;
 
@@ -63,7 +41,6 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="descP", type="string", length=255, nullable=false)
-     * @Assert\NotBlank
      */
     private $descp;
 
@@ -71,9 +48,6 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="dispoP", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="")
-     * @Assert\Choice({"disponible", "nondisponible"})
-     *@Assert\NotBlank(message="vous n'avez rien choisi")
      */
     private $dispop;
 
@@ -81,9 +55,6 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="couleurP", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="")
-     * @Assert\Choice({"rouge", "bleu","noir","gris","marron"})
-     *@Assert\NotBlank(message="vous n'avez rien choisi")
      */
     private $couleurp;
 
@@ -91,7 +62,6 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="quantiteP", type="integer", nullable=false)
-     *@Assert\NotBlank
      */
     private $quantitep;
 
@@ -99,11 +69,40 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="tailleP", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="")
-     * @Assert\Choice({"s", "m","l","xl","xxl"})
-     *@Assert\NotBlank(message="vous n'avez rien choisi")
      */
     private $taillep;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
+    private $image;
+
+    /**
+     * @var \Categorieproduit
+     *
+     * @ORM\ManyToOne(targetEntity="Categorieproduit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categorieproduit_id", referencedColumnName="id")
+     * })
+     */
+    private $categorieproduit;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Utilisateur", mappedBy="idp")
+     */
+    private $iduser;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->iduser = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getIdp(): ?int
     {
@@ -194,5 +193,57 @@ class Produit
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
 
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategorieproduit(): ?Categorieproduit
+    {
+        return $this->categorieproduit;
+    }
+
+    public function setCategorieproduit(?Categorieproduit $categorieproduit): self
+    {
+        $this->categorieproduit = $categorieproduit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getIduser(): Collection
+    {
+        return $this->iduser;
+    }
+
+    public function addIduser(Utilisateur $iduser): self
+    {
+        if (!$this->iduser->contains($iduser)) {
+            $this->iduser[] = $iduser;
+            $iduser->addIdp($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIduser(Utilisateur $iduser): self
+    {
+        if ($this->iduser->removeElement($iduser)) {
+            $iduser->removeIdp($this);
+        }
+
+        return $this;
+    }
+    public function __toString() {
+        return strval($this->idp);
+    }
 }

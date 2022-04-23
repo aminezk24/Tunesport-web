@@ -49,5 +49,58 @@ class Evenement
      */
     private $descevent;
 
+    public function getIdEvent(): ?int
+    {
+        return $this->idEvent;
+    }
+
+    public function getNomevent(): ?string
+    {
+        return $this->nomevent;
+    }
+
+    public function setNomevent(string $nomevent): self
+    {
+        $this->nomevent = $nomevent;
+
+        return $this;
+    }
+
+    public function getDatedebevent(): ?\DateTimeInterface
+    {
+        return $this->datedebevent;
+    }
+
+    public function setDatedebevent(\DateTimeInterface $datedebevent): self
+    {
+        $this->datedebevent = $datedebevent;
+
+        return $this;
+    }
+
+    public function getDatefinevent(): ?\DateTimeInterface
+    {
+        return $this->datefinevent;
+    }
+
+    public function setDatefinevent(\DateTimeInterface $datefinevent): self
+    {
+        $this->datefinevent = $datefinevent;
+
+        return $this;
+    }
+
+    public function getDescevent(): ?string
+    {
+        return $this->descevent;
+    }
+
+    public function setDescevent(string $descevent): self
+    {
+        $this->descevent = $descevent;
+
+        return $this;
+    }
+
 
 }

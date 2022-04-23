@@ -63,5 +63,82 @@ class Reservation
      */
     private $idcoa;
 
+    public function getIdres(): ?int
+    {
+        return $this->idres;
+    }
+
+    public function getDateres(): ?\DateTimeInterface
+    {
+        return $this->dateres;
+    }
+
+    public function setDateres(\DateTimeInterface $dateres): self
+    {
+        $this->dateres = $dateres;
+
+        return $this;
+    }
+
+    public function getHeureres(): ?\DateTimeInterface
+    {
+        return $this->heureres;
+    }
+
+    public function setHeureres(\DateTimeInterface $heureres): self
+    {
+        $this->heureres = $heureres;
+
+        return $this;
+    }
+
+    public function getDispores(): ?string
+    {
+        return $this->dispores;
+    }
+
+    public function setDispores(string $dispores): self
+    {
+        $this->dispores = $dispores;
+
+        return $this;
+    }
+
+    public function getPrixres(): ?float
+    {
+        return $this->prixres;
+    }
+
+    public function setPrixres(float $prixres): self
+    {
+        $this->prixres = $prixres;
+
+        return $this;
+    }
+
+    public function getIdcli(): ?int
+    {
+        return $this->idcli;
+    }
+
+    public function setIdcli(?int $idcli): self
+    {
+        $this->idcli = $idcli;
+
+        return $this;
+    }
+
+    public function getIdcoa(): ?int
+    {
+        return $this->idcoa;
+    }
+
+    public function setIdcoa(int $idcoa): self
+    {
+        $this->idcoa = $idcoa;
+
+        return $this;
+    }
+
 
 }

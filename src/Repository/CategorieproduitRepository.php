@@ -73,4 +73,6 @@ class CategorieproduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
 }

@@ -31,11 +31,14 @@
                             <th class="text-start">quantitep</th>
                             <th class="text-start">taileep</th>
                             <th class="text-start">nomCP</th>
+                            <th class="text-start">image</th>
+
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {%  for produit in produits %}
+                        {%  for produit in produits  %}
+
                             <tr>
                                 <td><img class="rounded-circle me-2" width="30" height="30" src={{ asset("assets/img/avatars/avatar5.jpeg") }}>{{ produit.nomp }}</td>
                                 <td>{{ produit.prixp }}</td>
@@ -45,6 +48,8 @@
                                 <td>{{ produit.quantitep }}</td>
                                 <td>{{ produit.taillep }}</td>
                                 <td>{{ produit.categorieproduit.nomCP }}</td>
+                                <td><img src="{{asset('/assets/img/')~ produit.image  }}"
+                                     alt="" style="width: 350px; height: 250px"><hr></td>
                                 <td class="text-center" style="width: 137.812px;height: 50px;">
                                     <div class="btn-group" role="group">
                                         <a href="{{ path('app_produit_show', {'idp': produit.idp}) }}">

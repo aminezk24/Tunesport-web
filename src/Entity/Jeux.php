@@ -63,5 +63,82 @@ class Jeux
      */
     private $conreqjeux;
 
+    public function getIdjeux(): ?int
+    {
+        return $this->idjeux;
+    }
+
+    public function getNomjeux(): ?string
+    {
+        return $this->nomjeux;
+    }
+
+    public function setNomjeux(string $nomjeux): self
+    {
+        $this->nomjeux = $nomjeux;
+
+        return $this;
+    }
+
+    public function getDatesortjeux(): ?\DateTimeInterface
+    {
+        return $this->datesortjeux;
+    }
+
+    public function setDatesortjeux(\DateTimeInterface $datesortjeux): self
+    {
+        $this->datesortjeux = $datesortjeux;
+
+        return $this;
+    }
+
+    public function getTaillejeux(): ?int
+    {
+        return $this->taillejeux;
+    }
+
+    public function setTaillejeux(int $taillejeux): self
+    {
+        $this->taillejeux = $taillejeux;
+
+        return $this;
+    }
+
+    public function getDescjeux(): ?string
+    {
+        return $this->descjeux;
+    }
+
+    public function setDescjeux(string $descjeux): self
+    {
+        $this->descjeux = $descjeux;
+
+        return $this;
+    }
+
+    public function getPlatdispojeux(): ?string
+    {
+        return $this->platdispojeux;
+    }
+
+    public function setPlatdispojeux(string $platdispojeux): self
+    {
+        $this->platdispojeux = $platdispojeux;
+
+        return $this;
+    }
+
+    public function getConreqjeux(): ?string
+    {
+        return $this->conreqjeux;
+    }
+
+    public function setConreqjeux(string $conreqjeux): self
+    {
+        $this->conreqjeux = $conreqjeux;
+
+        return $this;
+    }
+
 
 }

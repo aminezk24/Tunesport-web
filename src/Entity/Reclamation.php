@@ -49,5 +49,58 @@ class Reclamation
      */
     private $heurR = 'CURRENT_TIMESTAMP';
 
+    public function getIdR(): ?int
+    {
+        return $this->idR;
+    }
+
+    public function getDescR(): ?string
+    {
+        return $this->descR;
+    }
+
+    public function setDescR(string $descR): self
+    {
+        $this->descR = $descR;
+
+        return $this;
+    }
+
+    public function getDateR(): ?\DateTimeInterface
+    {
+        return $this->dateR;
+    }
+
+    public function setDateR(\DateTimeInterface $dateR): self
+    {
+        $this->dateR = $dateR;
+
+        return $this;
+    }
+
+    public function getStatuR(): ?string
+    {
+        return $this->statuR;
+    }
+
+    public function setStatuR(string $statuR): self
+    {
+        $this->statuR = $statuR;
+
+        return $this;
+    }
+
+    public function getHeurR(): ?\DateTimeInterface
+    {
+        return $this->heurR;
+    }
+
+    public function setHeurR(\DateTimeInterface $heurR): self
+    {
+        $this->heurR = $heurR;
+
+        return $this;
+    }
+
 
 }

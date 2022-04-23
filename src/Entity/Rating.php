@@ -56,5 +56,70 @@ class Rating
      */
     private $idcoa;
 
+    public function getIdrat(): ?int
+    {
+        return $this->idrat;
+    }
+
+    public function getTitlerat(): ?string
+    {
+        return $this->titlerat;
+    }
+
+    public function setTitlerat(string $titlerat): self
+    {
+        $this->titlerat = $titlerat;
+
+        return $this;
+    }
+
+    public function getDaterat(): ?\DateTimeInterface
+    {
+        return $this->daterat;
+    }
+
+    public function setDaterat(\DateTimeInterface $daterat): self
+    {
+        $this->daterat = $daterat;
+
+        return $this;
+    }
+
+    public function getValuerat(): ?int
+    {
+        return $this->valuerat;
+    }
+
+    public function setValuerat(int $valuerat): self
+    {
+        $this->valuerat = $valuerat;
+
+        return $this;
+    }
+
+    public function getIdcli(): ?int
+    {
+        return $this->idcli;
+    }
+
+    public function setIdcli(int $idcli): self
+    {
+        $this->idcli = $idcli;
+
+        return $this;
+    }
+
+    public function getIdcoa(): ?int
+    {
+        return $this->idcoa;
+    }
+
+    public function setIdcoa(int $idcoa): self
+    {
+        $this->idcoa = $idcoa;
+
+        return $this;
+    }
+
 
 }

@@ -56,5 +56,70 @@ class Tournoi
      */
     private $recomptour;
 
+    public function getIdtour(): ?int
+    {
+        return $this->idtour;
+    }
+
+    public function getNomtour(): ?string
+    {
+        return $this->nomtour;
+    }
+
+    public function setNomtour(string $nomtour): self
+    {
+        $this->nomtour = $nomtour;
+
+        return $this;
+    }
+
+    public function getDatedebtour(): ?\DateTimeInterface
+    {
+        return $this->datedebtour;
+    }
+
+    public function setDatedebtour(\DateTimeInterface $datedebtour): self
+    {
+        $this->datedebtour = $datedebtour;
+
+        return $this;
+    }
+
+    public function getDatefintour(): ?\DateTimeInterface
+    {
+        return $this->datefintour;
+    }
+
+    public function setDatefintour(\DateTimeInterface $datefintour): self
+    {
+        $this->datefintour = $datefintour;
+
+        return $this;
+    }
+
+    public function getDesctour(): ?string
+    {
+        return $this->desctour;
+    }
+
+    public function setDesctour(string $desctour): self
+    {
+        $this->desctour = $desctour;
+
+        return $this;
+    }
+
+    public function getRecomptour(): ?string
+    {
+        return $this->recomptour;
+    }
+
+    public function setRecomptour(string $recomptour): self
+    {
+        $this->recomptour = $recomptour;
+
+        return $this;
+    }
+
 
 }

@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\Upload;
 use App\Entity\Utilisateur;
 use App\Form\Categorieproduit1Type;
-use App\Entity\Favoris;
-
 use App\Form\ProduitType;
+use App\Form\UploadType;
+use App\Repository\ProduitRepository;
+use App\Service\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf as dompdf;
+use Dompdf\Options;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProduitController extends AbstractController
 {
+
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */
@@ -66,6 +72,8 @@ class ProduitController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 
     /**
      * @Route("/{idp}", name="app_produit_show", methods={"GET"})
@@ -147,6 +155,71 @@ class ProduitController extends AbstractController
         }
 
     }
+    /**
+     * @Route("/produit/data", name="produit_data")
+     */
+    public function data(EntityManagerInterface $entityManager): Response
+    { $produits = $entityManager
+        ->getRepository(Produit::class)
+        ->findAll();
+
+
+ return $this->render('produit/data.html.twig', [
+     'produits' => $produits,
+ ]);
 
 
     }
+    /**
+     * @Route("/produit/data/download", name="produit_data_download")
+     */
+    public function produitDataDownload(EntityManagerInterface $entityManager): Response
+    {
+        $produits = $entityManager
+
+
+                        ->getRepository(Produit::class)
+            ->findAll();
+
+
+        // On définit les options du PDF
+        $pdfOptions = new Options();
+        // Police par défaut
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->setIsRemoteEnabled(true);
+
+        // On instancie Dompdf
+        $dompdf = new Dompdf($pdfOptions);
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed' => TRUE
+            ]
+        ]);
+        $dompdf->setHttpContext($context);
+
+        // On génère le html
+        $html = $this->renderView('produit/download.html.twig', [
+            'produits' => $produits,
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        // On génère un nom de fichier
+        $fichier = 'produit-data.pdf';
+
+        // On envoie le PDF au navigateur
+        $dompdf->stream($fichier, [
+            'Attachment' => true
+        ]);
+
+        return new Response();
+    }
+
+
+
+
+}

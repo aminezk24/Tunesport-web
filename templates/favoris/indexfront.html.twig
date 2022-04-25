@@ -1,174 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Favoris index{% endblock %}
 
 {% block body %}
-    {#
-    <section class="blog-section spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-9 col-lg-8 col-md-7">
-                        <div class="section-title text-white">
-                            <h2>Latest News</h2>
-                        </div>
-                        <ul class="blog-filter">
+    <h1>favoris index</h1>
 
-                        </ul>
-     {% for tournoi in tournois %}
-        <div class="search-result-card">
-        <div class="header">
-
-        </div><div class="body">
-        <div class="user-details ">
-        <div class="img ">
-        </div>
-        <div class="name -break text-white">
-        <h3>{{ tournoi.titre }} </h3>
-        </div>
-        </div>
-        <ul class="list-details">
-        <li>
-        <i class="icon fa fa-gamepad bg-white">
-        </i>
-        <span class="text text-white">{{ tournoi.status }}</span>
-        </li><li><i class="icon fa fa-users bg-white">
-        </i><span class="text text-white ">{{ tournoi.type }}</span></li><li>
-        <i class="icon fa fa-calendar bg-white"></i><span class="text text-white">{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d') : '' }}</span>
-        </li><li><i class="icon fa fa-calendar bg-white"></i><span class="text text-white">{{ tournoi.dateFin ? tournoi.dateFin|date('Y-m-d') : '' }}</span></li>
-        </ul><div class="actions"><a class="btn btn-block btn-danger" >Participer</a>
-        </div></div></div>
-     {% endfor %}
-
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-5 sidebar">
-                        <div id="stickySidebar">
-                            <div class="widget-item">
-                                <h4 class="widget-title">Trending</h4>
-                                <div class="trending-widget">
-                                    <div class="tw-item">
-                                        <div class="tw-thumb">
-                                            <img src="{{ asset('front/./img/blog-widget/1.jpg') }}" alt="#">
-                                        </div>
-                                        <div class="tw-text">
-                                            <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-                                            <h5>The best online game is out now!</h5>
-                                        </div>
-                                    </div>
-                                    <div class="tw-item">
-                                        <div class="tw-thumb">
-                                            <img src="{{ asset('front/./img/blog-widget/2.jpg') }}" alt="#">
-                                        </div>
-                                        <div class="tw-text">
-                                            <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-                                            <h5>The best online game is out now!</h5>
-                                        </div>
-                                    </div>
-                                    <div class="tw-item">
-                                        <div class="tw-thumb">
-                                            <img src="{{ asset('front/./img/blog-widget/3.jpg') }}" alt="#">
-                                        </div>
-                                        <div class="tw-text">
-                                            <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-                                            <h5>The best online game is out now!</h5>
-                                        </div>
-                                    </div>
-                                    <div class="tw-item">
-                                        <div class="tw-thumb">
-                                            <img src="{{ asset('front/./img/blog-widget/4.jpg') }}" alt="#">
-                                        </div>
-                                        <div class="tw-text">
-                                            <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-                                            <h5>The best online game is out now!</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="widget-item">
-                                <div class="categories-widget">
-                                    <h4 class="widget-title">categories</h4>
-                                    <ul>
-                                        <li><a href="">Games</a></li>
-                                        <li><a href="">Gaming Tips & Tricks</a></li>
-                                        <li><a href="">Online Games</a></li>
-                                        <li><a href="">Team Games</a></li>
-                                        <li><a href="">Community</a></li>
-                                        <li><a href="">Uncategorized</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="widget-item">
-                            <a href="#" class="add">
-                                <img src="{{ asset('front/./img/add.jpg') }}" alt="">
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    #}
-
-
-
-    <!-- Page Features -->
-
-
-    <div class="row text-center blog-section spad mx-auto">
-
-        {#
-        {% for participation in participations %}
-
-                <div class="col-lg-3 col-md-6 mb-4 mt-5">
-                    <div class="card h-100 bg-white text-black border-danger mt-5">
-                        <img class="card-img-top" src="{{ asset('uploads/fifa2022.png') }}" alt="">
-                        <div class="card-body">
-                         <small class="text-muted">Date Debut: {{ participation.idtournois.dateDebut ? participation.idtournois.dateDebut|date('Y-m-d') : '' }} - Date Fin: {{ participation.idtournois.dateFin ? participation.idtournois.dateFin|date('Y-m-d') : '' }}</small>
-
-                            <h4 class="card-title font-weight-bold mb-2">
-                                {{ participation.idtournois.titre }}
-                            </h4>
-                            <ul class="list-group list-group-flush">
-                                <p class="list-group-item text-danger">Status: {{ participation.idtournois.status }}</p>
-                                <p class="list-group-item">Participants:{{ participation.idtournois.nbrparticipants }} | Type: {{ participation.idtournois.type }}</p>
-                         <p class="card-text ">{{ participation.idtournois.descriptiontournois }}</p>
-                            </ul>
-                        </div>
-                        <div class="card-footer">
-                            <a class="btn btn-danger" name="readmore" href="{{ path('add_participation_tournois', {'id': participation.idtournois })}}">Annuler!</a>
-                        </div>
-                    </div>
-                </div>
-
-         {% endfor %}
-        #}
-
-        {% for participation in equipes %}
-            {% for participation in participation.idtournois %}
-
-                <div class="col-lg-3 col-md-6 mb-4 mt-5">
-                    <div class="card h-100 bg-white text-black border-danger mt-5">
-                        <img class="card-img-top" src="{{ asset('uploads/' ~ participation.idjeux.imagejeux) }}" alt="">
-
-                        <div class="card-body">
-                            <small class="text-muted">Date Debut: {{ participation.dateDebut ? participation.dateDebut|date('Y-m-d') : '' }} - Date Fin: {{ participation.dateFin ? participation.dateFin|date('Y-m-d') : '' }}</small>
-
-                            <h4 class="card-title font-weight-bold mb-2">
-                                {{ participation.titre }}
-                            </h4>
-                            <ul class="list-group list-group-flush">
-                                <p class="list-group-item text-danger">Status: {{ participation.status }}</p>
-                                <p class="list-group-item">Participants:{{ participation.nbrparticipants }} | Type: {{ participation.type }}</p>
-                                <p class="card-text ">{{ participation.descriptiontournois }}</p>
-                            </ul>
-                        </div>
-                        <div class="card-footer">
-                            <form class="btn btn-danger" method="post" action="{{ path('app_participation_delete', {'idtournois': participation.idtournois}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                <button class="btn">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Idp</th>
+            <th>Nomp</th>
+            <th>PrixP</th>
+            <th>DescP</th>
+            <th>Mdp</th>
+            <th>Date</th>
+            <th>Tel</th>
+            <th>Role</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.mdp }}</td>
+                <td>{{ utilisateur.date ? utilisateur.date|date('Y-m-d') : '' }}</td>
+                <td>{{ utilisateur.tel }}</td>
+                <td>{{ utilisateur.role }}</td>
+                <td>
+                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">show</a>
+                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
         {% endfor %}
-    </div>
+        </tbody>
+    </table>
 
+    <a href="{{ path('app_utilisateur_new') }}">Create new</a>
 {% endblock %}
-

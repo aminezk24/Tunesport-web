@@ -10,105 +10,79 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-/**
- * @Route("/cart", name="cart_")
- */
+
 class CartController extends AbstractController
 {
+
     /**
-     * @Route("/", name="index")
+     * @Route("/cart", name="cart")
      */
-    public function index(SessionInterface $session, ProductsRepository $productsRepository)
+    public function index(SessionInterface $session, ProductsRepository $ProductRepository)
     {
-        $panier = $session->get("panier", []);
-
-        // On "fabrique" les données
-        $dataPanier = [];
-        $total = 0;
-
-        foreach($panier as $id => $quantite){
-            $product = $productsRepository->find($id);
-            $dataPanier[] = [
-                "produit" => $product,
-                "quantite" => $quantite
+        //recupere le panier actuel
+        $pannier = $session->get('pannier', []);
+        $pannierxithData = [];
+        foreach ($pannier as $id => $quantity) {
+            $pannierxithData[] = [
+                'produit' => $ProductRepository->find($id),
+                'quantity' => $quantity,
             ];
-            $total += $product->getPrixp() * $quantite;
         }
-
-        return $this->render('cart/index.html.twig', compact("dataPanier", "total"));
+        //get full cart  total
+        //dd('total', $pannierxithData);
+        $total = 0;
+        foreach ($pannierxithData as $item) {
+            $totalItem = $item['produit']->getPrixp() * $item['quantity'];
+            $total += $totalItem;
+        }
+        //$items=$paginator->paginate($pannierxithData,$request->query->getInt('page',1),2);
+        return $this->render('cart/index.html.twig', [
+            'items' => $pannierxithData,
+            'total' => $total,
+        ]);
     }
 
     /**
-     * @Route("/add/{id}", name="add")
+     * @Route("/cart/add/{id}", name="cart_add")
      */
-    public function add(Produit $product, SessionInterface $session)
+    public function add($id, SessionInterface $session)
     {
-        // On récupère le panier actuel
-        $panier = $session->get("panier", []);
-        $id = $product->getIdp();
+        $pannier = $session->get('pannier', []);
 
-        if(!empty($panier[$id])){
-            $panier[$id]++;
-        }else{
-            $panier[$id] = 1;
+        if (!empty($pannier[$id])) {
+            $pannier[$id]++;
+        } else {
+            $pannier[$id] = 1;
         }
+        $session->set('pannier', $pannier);
 
-        // On sauvegarde dans la session
-        $session->set("panier", $panier);
+        return $this->redirectToRoute('cart');
 
-        return $this->redirectToRoute("cart_index");
     }
+
+    /*
+     * @Route("/cart/remove/{id}", name="cart_remove")
+     */
+    public function remove($id, SessionInterface $session)
+    {
+        $pannier = $session->get('pannier', []);
+        if (!empty($pannier[$id])) {
+            unset($pannier[$id]);
+        }
+        $session->set('pannier', $pannier);
+        return $this->redirectToRoute('cart');
+    }
+
 
     /**
-     * @Route("/remove/{id}", name="remove")
+     * @Route("/cart/remove/", name="cart_remove_all")
      */
-    public function remove(Produit $product, SessionInterface $session)
+    public function removeAll(SessionInterface $session)
     {
-        // On récupère le panier actuel
-        $panier = $session->get("panier", []);
-        $id = $product->getIdp();
+        $pannier = $session->get('pannier', []);
+        unset($pannier);
 
-        if(!empty($panier[$id])){
-            if($panier[$id] > 1){
-                $panier[$id]--;
-            }else{
-                unset($panier[$id]);
-            }
-        }
-
-        // On sauvegarde dans la session
-        $session->set("panier", $panier);
-
-        return $this->redirectToRoute("cart_index");
+        $session->set('pannier', []);
+        return $this->redirectToRoute('cart');
     }
-
-    /**
-     * @Route("/delete/{id}", name="delete")
-     */
-    public function delete(Produit $product, SessionInterface $session)
-    {
-        // On récupère le panier actuel
-        $panier = $session->get("panier", []);
-        $id = $product->getIdp();
-
-        if(!empty($panier[$id])){
-            unset($panier[$id]);
-        }
-
-        // On sauvegarde dans la session
-        $session->set("panier", $panier);
-
-        return $this->redirectToRoute("cart_index");
-    }
-
-    /**
-     * @Route("/delete", name="delete_all")
-     */
-    public function deleteAll(SessionInterface $session)
-    {
-        $session->remove("panier");
-
-        return $this->redirectToRoute("cart_index");
-    }
-
 }

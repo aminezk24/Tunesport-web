@@ -1,0 +1,83 @@
+{% extends 'base-pdf.html.twig' %}
+{% block body %}
+
+
+
+
+    <div class="container-fluid">
+        <center><h1 class="mb-30">liste des produits</h1></center>
+        <div class="card shadow">
+            <div class="card-header py-3">
+
+
+
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                        <table border=1>
+
+                        <thead>
+                        <tr>
+                            <th class=scope="col">nom</th>
+                            <th class=scope="col">prix</th>
+                            <th class=scope="col">desception</th>
+                            <th class=scope="col">disponibilite</th>
+                            <th class=scope="col">couleur</th>
+                            <th class=scope="col">quantite</th>
+                            <th class=scope="col">tailee</th>
+                            <th class=scope="col">categorie</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  for produit in produits  %}
+
+                            <tr>
+                                <td>{{ produit.nomp }}</td>
+                                <td>{{ produit.prixp }}</td>
+                                <td>{{ produit.descp }}</td>
+                                <td>{{ produit.dispop }}</td>
+                                <td>{{ produit.couleurp }}</td>
+                                <td>{{ produit.quantitep }}</td>
+                                <td>{{ produit.taillep }}</td>
+                                <td>{{ produit.categorieproduit.nomCP }}</td>
+
+
+
+
+
+
+
+
+
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <h3>Vos images</h3>
+                    {% for produit in produits %}
+                    <h3>{{ produit.nomp }}</h3>
+                    {% for image in produits %}
+                        {{ absolute_url(asset('/assets/img/')~ produit.image ) }}
+                        {% endfor %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</table>
+
+{% endblock %}
+
+
+
+
+

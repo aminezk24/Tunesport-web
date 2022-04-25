@@ -4,12 +4,14 @@ namespace App\Form;
 
 use App\Entity\Categorieproduit;
 use App\Entity\Produit;
+use Captcha\Bundle\CaptchaBundle\Validator\Constraints\ValidCaptcha;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class ProduitType extends AbstractType
 {
@@ -33,6 +35,9 @@ class ProduitType extends AbstractType
                 'multiple'=>true,
                 'mapped'=> false,
                 'required'=>false])
+
+
+
         ;
     }
 

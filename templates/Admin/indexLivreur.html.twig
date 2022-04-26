@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="">
+                <span class="d-none d-lg-block">Tunesport</span>
+            </a>
+
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+
+            </form>
+        </div><!-- End Search Bar -->
+
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Table</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ path('display_admin')}}">
+                            <i class="bi bi-circle"></i><span>Jeux</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href={{ path('display_adminM')}}>
+                            <i class="bi bi-circle"></i><span>Mise A Jour</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href={{ path('display_adminL')}}>
+
+                            <i class="bi bi-circle"></i><span>Livraison</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href={{ path('display_adminLivreur')}}>
+
+                            <i class="bi bi-circle"></i><span>Livreur</span>
+                        </a>
+                    </li>
+
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Dashboard</h1>
+            <nav>
+                <div class="container">
+                    {% for message in app.flashes('notice') %}
+                        <div class="alert alert-success mt-4 mb-b">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Tel</th>
+                            <th scope="col">Zone</th>
+                            <th scope="col">type vehicule</th>
+                            <th scope="col">disponiblite </th>
+
+
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in livreur  %}
+                            <tr>
+                                <th scope="row">{{ data.id }}</th>
+                                <td>{{ data.nomliv }}</td>
+                                <td>{{ data.prenomliv }}</td>
+                                <td>{{ data.telliv}}</td>
+                                <td>{{ data.zone}}</td>
+                                <td>{{ data.typevehi }}</td>
+                                <td>{{ data.dispo }}</td>
+
+
+                                <td><a class="btn btn-danger"  href="{{ path('droplivreur',{'id': data.id  })}}">Supprimer</a></td>
+                                <td><a class="btn btn-warning" href="{{ path('updatelivreur',{'id': data.id })}}">Modifier</a></td>
+                                <td><a class="btn btn-primary" href="{{ path('affcreateliv',{'id': data.id })}}">Affecter livraison</a></td>
+
+
+
+
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <td><a class="btn btn-primary" href="{{ path('createlivreur')}}">Ajouter Livreur</a></td>
+
+                    <td></td>
+
+                </div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section dashboard">
+        </section>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>TunEsport</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </footer><!-- End Footer -->
+
+{% endblock %}

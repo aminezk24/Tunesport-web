@@ -133,6 +133,33 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mercuryseries/flashy-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ivory/json-builder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ivory/google-map-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ivory/google-map" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/guzzle6-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/httplug" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/clue/stream-filter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/httplug-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/stopwatch-plugin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/logger-plugin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/client-common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/discovery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dasprid/enum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/installer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

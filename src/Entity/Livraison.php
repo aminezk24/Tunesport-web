@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Livraison
  *
- * @ORM\Table(name="livraison", indexes={@ORM\Index(name="IDX_A60C9F1F56039734", columns={"idC"})})
+ * @ORM\Table(name="livraison")
  * @ORM\Entity
  */
 class Livraison
@@ -42,15 +42,65 @@ class Livraison
      */
     private $validation = 'NonValide';
 
+
+
     /**
-     * @var \Commande
-     *
-     * @ORM\ManyToOne(targetEntity="Commande")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idC", referencedColumnName="idC")
-     * })
+     * @ORM\ManyToOne(targetEntity=Livreur::class, inversedBy="livraison")
      */
-    private $idc;
+    private $livreur;
+
+    public function getLivreur(): ?Livreur
+    {
+        return $this->livreur;
+    }
+
+    public function setLivreur(?Livreur $livreur): self
+    {
+        $this->livreur = $livreur;
+
+        return $this;
+    }
+
+    public function getIdliv(): ?int
+    {
+        return $this->idliv;
+    }
+
+    public function getAdressel(): ?string
+    {
+        return $this->adressel;
+    }
+
+    public function setAdressel(string $adressel): self
+    {
+        $this->adressel = $adressel;
+
+        return $this;
+    }
+
+    public function getPrixp(): ?float
+    {
+        return $this->prixp;
+    }
+
+    public function setPrixp(float $prixp): self
+    {
+        $this->prixp = $prixp;
+
+        return $this;
+    }
+
+    public function getValidation(): ?string
+    {
+        return $this->validation;
+    }
+
+    public function setValidation(?string $validation): self
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
 
 
 }

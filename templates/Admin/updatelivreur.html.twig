@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h4 class="mt-5 mb-5">Update jeux</h4>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="form-group" >
+                    {{ form_label(form.nomliv) }}
+                    {{ form_widget(form.nomliv,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.nomliv,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.prenomliv) }}
+                    {{ form_widget(form.prenomliv,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.prenomliv,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.telliv) }}
+                    {{ form_widget(form.telliv,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.telliv,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.zone) }}
+                    {{ form_widget(form.zone,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.zone,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.typevehi) }}
+                    {{ form_widget(form.typevehi,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.typevehi,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.dispo) }}
+                    {{ form_widget(form.dispo,{'attr':{'class':'form-control'}})}}
+                    {{ form_errors(form.dispo,{'attr':{'class':'text-danger'}})}}
+
+                </div>
+                <div class="form-group" >
+                    <button class="btn btn-info mt-2 text-white">Modifier</button>
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,13 @@
 {
+    "bacon/bacon-qr-code": {
+        "version": "2.0.7"
+    },
+    "clue/stream-filter": {
+        "version": "v1.6.0"
+    },
+    "dasprid/enum": {
+        "version": "1.0.3"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -82,11 +91,41 @@
     "egulias/email-validator": {
         "version": "3.1.2"
     },
+    "endroid/installer": {
+        "version": "1.4.0"
+    },
+    "endroid/qr-code": {
+        "version": "4.4.8"
+    },
+    "endroid/qr-code-bundle": {
+        "version": "4.0.7"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.5"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.5"
+    },
+    "ivory/google-map": {
+        "version": "3.0.8"
+    },
+    "ivory/google-map-bundle": {
+        "version": "3.0.7"
+    },
+    "ivory/json-builder": {
+        "version": "3.0.3"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "mercuryseries/flashy-bundle": {
+        "version": "v3.0.2"
     },
     "monolog/monolog": {
         "version": "1.27.0"
@@ -102,6 +141,45 @@
     },
     "phar-io/version": {
         "version": "3.2.1"
+    },
+    "php-http/client-common": {
+        "version": "2.5.0"
+    },
+    "php-http/discovery": {
+        "version": "1.14.1"
+    },
+    "php-http/guzzle6-adapter": {
+        "version": "v2.0.2"
+    },
+    "php-http/httplug": {
+        "version": "2.3.0"
+    },
+    "php-http/httplug-bundle": {
+        "version": "1.26",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.6",
+            "ref": "87b3d491d593d2c6e3b90bf0689ac69a188bfa5f"
+        },
+        "files": [
+            "./config/packages/httplug.yaml"
+        ]
+    },
+    "php-http/logger-plugin": {
+        "version": "1.3.0"
+    },
+    "php-http/message": {
+        "version": "1.13.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "1.1.0"
+    },
+    "php-http/stopwatch-plugin": {
+        "version": "1.4.1"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -150,11 +228,23 @@
     "psr/container": {
         "version": "1.1.2"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"

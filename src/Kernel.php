@@ -42,6 +42,17 @@ class Kernel extends BaseKernel
         $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
+    public function registerBundles1(): array
+    {
+        return [
+            // ...
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+
+            // Optionally
+            new Ivory\SerializerBundle\IvorySerializerBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
+        ];
+    }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
@@ -50,5 +61,9 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+
     }
+
+
 }
+

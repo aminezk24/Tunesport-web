@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     {% endblock %}
 </head>
 
@@ -35,6 +36,8 @@
     {% block header %}
 
     <header class="main_menu single_page_menu">
+        <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -211,6 +214,7 @@
 {% block javascripts %}
 <!-- jquery plugins here-->
 <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
 <!-- popper js -->
 <script src="js/popper.min.js"></script>
 <!-- bootstrap js -->
@@ -235,7 +239,10 @@
 <script src="js/mail-script.js"></script>
 <!-- custom js -->
 <script src="js/custom.js"></script>
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
 {% endblock %}
+
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 
 </html>

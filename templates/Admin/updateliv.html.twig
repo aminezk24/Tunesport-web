@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h4 class="mt-5 mb-5">Update livraison</h4>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                <div class="form-group" >
+                    {{ form_label(form.adressel) }}
+                    {{ form_widget(form.adressel,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.prixP) }}
+                    {{ form_widget(form.prixP,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(form.validation) }}
+                    {{ form_widget(form.validation,{'attr':{'class':'form-control'}})}}
+                </div>
+
+
+                <div class="form-group" >
+                    <button class="btn btn-info mt-2 text-white">Modifier</button>
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

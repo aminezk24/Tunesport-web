@@ -52,5 +52,58 @@ class Commande
      */
     private $idp;
 
+    public function getIdc(): ?int
+    {
+        return $this->idc;
+    }
+
+    public function getAdressec(): ?string
+    {
+        return $this->adressec;
+    }
+
+    public function setAdressec(string $adressec): self
+    {
+        $this->adressec = $adressec;
+
+        return $this;
+    }
+
+    public function getDatec(): ?\DateTimeInterface
+    {
+        return $this->datec;
+    }
+
+    public function setDatec(\DateTimeInterface $datec): self
+    {
+        $this->datec = $datec;
+
+        return $this;
+    }
+
+    public function getStatusc(): ?string
+    {
+        return $this->statusc;
+    }
+
+    public function setStatusc(string $statusc): self
+    {
+        $this->statusc = $statusc;
+
+        return $this;
+    }
+
+    public function getIdp(): ?Produit
+    {
+        return $this->idp;
+    }
+
+    public function setIdp(?Produit $idp): self
+    {
+        $this->idp = $idp;
+
+        return $this;
+    }
+
 
 }

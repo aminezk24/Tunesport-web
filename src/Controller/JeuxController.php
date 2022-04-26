@@ -5,6 +5,7 @@ use App\Entity\Jeux;
 use App\Entity\Miseajour;
 
 use App\Form\JeuxType;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,22 +13,32 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class JeuxController extends AbstractController
 {
+    private $flashy;
+
+
     /**
      * @Route("/jeux", name="app_jeux")
      */
-    public function index(): Response
+    public function index(FlashyNotifier $flashy): Response
     {
-        return $this->render('index.html.twig', [
-            'controller_name' => 'JeuxController',
+        $flashy->success('Welcome To Games!', 'http://your-awesome-link.com');
+
+        $data = $this->getDoctrine()->getRepository(Jeux::class)->findAll();
+
+        return $this->render('Admin/index.html.twig', [
+            'jeux' => $data
         ]);
     }
 
     /**
      * @Route("/Admin", name="display_admin")
      */
-    public function indexadmin(): Response
+    public function indexadmin(FlashyNotifier $flashy): Response
     {
         $data = $this->getDoctrine()->getRepository(Jeux::class)->findAll();
+      //  $flashy->success('Welcome To Games!', 'http://your-awesome-link.com');
+
+
         return $this->render('Admin/index.html.twig', [
             'jeux' => $data
         ]);
@@ -38,7 +49,7 @@ class JeuxController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function create(Request $request){
+    public function create(Request $request,FlashyNotifier $flashy){
         $jeux = new Jeux();
         $form = $this->createForm(JeuxType::class, $jeux);
         $form->handleRequest($request);
@@ -57,7 +68,9 @@ class JeuxController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($jeux);
             $em->flush();
-            $this->addFlash('notice','Done');
+            $flashy->success('game created!', 'http://your-awesome-link.com');
+
+
             return $this->redirectToRoute('display_admin');
         }
         return $this->render('Admin/create.html.twig',[
@@ -68,12 +81,13 @@ class JeuxController extends AbstractController
     /**
      * @Route("/drop/{idjeux}", name="drop")
      */
-    public function drop($idjeux){
+    public function drop($idjeux,FlashyNotifier $flashy){
         $data = $this->getDoctrine()->getRepository(Jeux::class)->find($idjeux);
         $em = $this->getDoctrine()->getManager();
         $em->remove($data);
         $em->flush();
-        $this->addFlash('notice','jeux supprimer');
+        $flashy->error('game Deleted!', 'http://your-awesome-link.com');
+
         return $this->redirectToRoute('display_admin');
     }
 
@@ -81,7 +95,7 @@ class JeuxController extends AbstractController
     /**
      * @Route("/update/{idjeux}", name="update")
      */
-    public function update(Request $request, $idjeux){
+    public function update(Request $request, $idjeux,FlashyNotifier $flashy){
         $jeux = $this->getDoctrine()->getRepository(Jeux::class)->find($idjeux);
         $form = $this->createForm(Jeuxtype::class, $jeux);
         $form->handleRequest($request);
@@ -89,7 +103,8 @@ class JeuxController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($jeux);
             $em->flush();
-            $this->addFlash('notice','Mise a jour effectuer');
+            $flashy->primary('game Updated!', 'http://your-awesome-link.com');
+
             return $this->redirectToRoute('display_admin');
         }
         return $this->render('Admin/update.html.twig',[

@@ -24,16 +24,16 @@ class DoctrineMigrationVersions
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="executed_at", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="executed_at", type="datetime", nullable=true)
      */
-    private $executedAt = 'NULL';
+    private $executedAt;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="execution_time", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="execution_time", type="integer", nullable=true)
      */
-    private $executionTime = NULL;
+    private $executionTime;
 
     public function getVersion(): ?string
     {

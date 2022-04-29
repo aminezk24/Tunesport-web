@@ -3,12 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * Article
  *
  * @ORM\Table(name="article")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @UniqueEntity(
+ *     fields={"titreArticle"},
+ *     message="This Title Already Exists!"
+ * )
  */
 class Article
 {
@@ -25,6 +32,13 @@ class Article
      * @var string
      *
      * @ORM\Column(name="titre_article", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Enter The Title Please!")
+     * @Assert\Length(
+     *     min= 5,
+     *     max= 15,
+     *     minMessage="Too Short For A Title!",
+     *     maxMessage="Too Long For A Title!"
+     * )
      */
     private $titreArticle;
 
@@ -32,6 +46,7 @@ class Article
      * @var string
      *
      * @ORM\Column(name="description_article", type="text", length=65535, nullable=false)
+     *  @Assert\NotBlank(message="Enter Your Description Please!")
      */
     private $descriptionArticle;
 
@@ -39,6 +54,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="date_article", type="date", nullable=false)
+     *  @Assert\DateTime(message="Enter the Current DateTime Please!")
      */
     private $dateArticle;
 
@@ -101,6 +117,8 @@ class Article
 
         return $this;
     }
-
+    public function __toString() {
+        return $this->titreArticle;
+    }
 
 }

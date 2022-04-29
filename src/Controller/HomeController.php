@@ -15,4 +15,14 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig');
     }
+
+    /**
+     * @Route("/front", name="display_front")
+     */
+    public function front(): Response
+    {
+        return $this->render('Front/index.html.twig'
+        );
+
+    }
 }

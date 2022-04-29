@@ -3,12 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * Commentaires
  *
- * @ORM\Table(name="commentaires", indexes={@ORM\Index(name="fk_id_article", columns={"id_art"})})
- * @ORM\Entity
+ * @ORM\Table(name="commentaires", indexes={@ORM\Index(name="teeee", columns={"titre_article"})})
+ * @ORM\Entity(repositoryClass="App\Repository\CommentairesRepository")
+ * @UniqueEntity(
+ *     fields={"titreCommentaire"},
+ *     message="This Username Already Exists!"
+ * )
  */
 class Commentaires
 {
@@ -25,6 +32,13 @@ class Commentaires
      * @var string
      *
      * @ORM\Column(name="titre_commentaire", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Enter Your Username Please!")
+     * @Assert\Length(
+     *     min= 5,
+     *     max= 15,
+     *     minMessage="Too Short For A Username !",
+     *     maxMessage="Too Long For A Username !"
+     * )
      */
     private $titreCommentaire;
 
@@ -32,6 +46,7 @@ class Commentaires
      * @var string
      *
      * @ORM\Column(name="contenu_commentaire", type="text", length=65535, nullable=false)
+     * @Assert\NotBlank(message="Enter Votre Commentaire Please!")
      */
     private $contenuCommentaire;
 
@@ -43,11 +58,14 @@ class Commentaires
     private $dateCommentaire;
 
     /**
-     * @var int
+     * @var \Article
      *
-     * @ORM\Column(name="id_art", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="titre_article", referencedColumnName="id_article")
+     * })
      */
-    private $idArt;
+    private $titreArticle;
 
     public function getIdCommentaire(): ?int
     {
@@ -90,14 +108,14 @@ class Commentaires
         return $this;
     }
 
-    public function getIdArt(): ?int
+    public function getTitreArticle(): ?Article
     {
-        return $this->idArt;
+        return $this->titreArticle;
     }
 
-    public function setIdArt(int $idArt): self
+    public function setTitreArticle(?Article $titreArticle): self
     {
-        $this->idArt = $idArt;
+        $this->titreArticle = $titreArticle;
 
         return $this;
     }

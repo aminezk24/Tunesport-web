@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Commentaires;
 use App\Form\CommentairesType;
+use App\Repository\CommentairesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,30 +22,27 @@ class CommentairesController extends AbstractController
     /**
      * @Route("/", name="app_commentaires_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(CommentairesRepository $commentairesRepository): Response
     {
-        $commentaires = $entityManager
-            ->getRepository(Commentaires::class)
-            ->findAll();
-
         return $this->render('commentaires/index.html.twig', [
-            'commentaires' => $commentaires,
+            'commentaires' => $commentairesRepository->findAll(),
         ]);
     }
 
     /**
      * @Route("/new", name="app_commentaires_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,MailerInterface $mailer): Response
     {
         $commentaire = new Commentaires();
         $form = $this->createForm(CommentairesType::class, $commentaire);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($commentaire);
             $entityManager->flush();
-
+            $this->sendEmail($mailer);
             return $this->redirectToRoute('app_commentaires_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,14 +65,13 @@ class CommentairesController extends AbstractController
     /**
      * @Route("/{idCommentaire}/edit", name="app_commentaires_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Commentaires $commentaire, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Commentaires $commentaire, CommentairesRepository $commentairesRepository): Response
     {
         $form = $this->createForm(CommentairesType::class, $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
+            $commentairesRepository->add($commentaire);
             return $this->redirectToRoute('app_commentaires_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -84,27 +84,37 @@ class CommentairesController extends AbstractController
     /**
      * @Route("/{idCommentaire}", name="app_commentaires_delete", methods={"POST"})
      */
-    public function delete(Request $request, Commentaires $commentaire, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Commentaires $commentaire, CommentairesRepository $commentairesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$commentaire->getIdCommentaire(), $request->request->get('_token'))) {
-            $entityManager->remove($commentaire);
-            $entityManager->flush();
+            $commentairesRepository->remove($commentaire);
         }
 
         return $this->redirectToRoute('app_commentaires_index', [], Response::HTTP_SEE_OTHER);
     }
+    public function sendEmail(MailerInterface $mailer)
+    {
 
-    /**
-     * @Route("/Article/{slug}")
-     */
-    public function show1($slug){
-        //return new Response(sprintf('Future page to the  article: %s',$slug));
-        $comments=["nICE TRY BRO","wow You look Good!","What about me ?"];
+        $email = (new Email())
+            ->from('responsable.tunesport@gmail.com')
+            ->to('utilisateur.tunesport@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('commentaire ajouté avec succé')
+            ->text('Bien ajouté')
+            ->html('')
+        ;
 
-        return $this->render('commentaires/show1.html.twig',[
-            'title' => ucwords(str_replace('_',' ', $slug)),
-            'comments' => $comments,
-        ]);
 
+        try {
+            $mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            echo($e->getMessage())  ;
+        }
+        echo 'email sent';
+
+        // ...
     }
 }

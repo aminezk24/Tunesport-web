@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -19,6 +20,17 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Article
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="article" , cascade={"remove" , "persist"})
+     */
+    private $commentairesss;
+
+
+    public function __construct()
+    {
+        $this->commentairesss = new ArrayCollection();
+    }
     /**
      * @var int
      *
@@ -117,8 +129,6 @@ class Article
 
         return $this;
     }
-    public function __toString() {
-        return $this->titreArticle;
-    }
+
 
 }

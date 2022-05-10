@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Commentaires;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/article")
@@ -24,6 +26,18 @@ class ArticleController extends AbstractController
             'articles' => $articleRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/listArticle", name="app_article_list", methods={"GET"})
+     */
+    public function listArticle(ArticleRepository $articleRepository): Response
+    {
+        return $this->render('article/listArticle.html.twig', [
+            'articles' => $articleRepository->findAll(),
+        ]);
+    }
+
+
 
     /**
      * @Route("/new", name="app_article_new", methods={"GET", "POST"})
@@ -52,13 +66,18 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/{idArticle}", name="app_article_show", methods={"GET"})
      */
-    public function show(Article $article): Response
+    public function show(EntityManagerInterface $entityManager, Article $article): Response
     {
+        $commentaires = $entityManager
+            ->getRepository(Commentaires::class)
+            ->findAll();
         return $this->render('article/show.html.twig', [
-            'article' => $article,
+            'article' => $article, 'commentaires'=>$commentaires,
         ]);
     }
 
@@ -92,6 +111,8 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 
 
 }

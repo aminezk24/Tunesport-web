@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -58,14 +59,26 @@ class Commentaires
     private $dateCommentaire;
 
     /**
-     * @var \Article
-     *
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="titre_article", referencedColumnName="id_article")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="commentairess")
+     * @ORM\JoinColumn(name="titre_article", referencedColumnName="id_article" , nullable=false , onDelete="CASCADE" )
      */
     private $titreArticle;
+
+    /**
+     * @return mixed
+     */
+    public function getTitreArticle()
+    {
+        return $this->titreArticle;
+    }
+
+    /**
+     * @param mixed $titreArticle
+     */
+    public function setTitreArticle($titreArticle): void
+    {
+        $this->titreArticle = $titreArticle;
+    }
 
     public function getIdCommentaire(): ?int
     {
@@ -108,17 +121,7 @@ class Commentaires
         return $this;
     }
 
-    public function getTitreArticle(): ?Article
-    {
-        return $this->titreArticle;
-    }
 
-    public function setTitreArticle(?Article $titreArticle): self
-    {
-        $this->titreArticle = $titreArticle;
-
-        return $this;
-    }
 
 
 }

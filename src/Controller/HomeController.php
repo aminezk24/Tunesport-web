@@ -21,7 +21,7 @@ class HomeController extends AbstractController
      */
     public function front(): Response
     {
-        return $this->render('Front/index.html.twig'
+        return $this->render('Fronttemplate/index.html.twig'
         );
 
     }

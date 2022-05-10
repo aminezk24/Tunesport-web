@@ -29,6 +29,15 @@ class CommentairesController extends AbstractController
         ]);
     }
 
+    function badwords($message){
+        $badwords = array("Bonjour1","bonsoiree","tifo");
+        $filter = array("*******","*********","****");
+        $message = str_replace($badwords,$filter,$message);
+        return $message;
+
+    }
+
+
     /**
      * @Route("/new", name="app_commentaires_new", methods={"GET", "POST"})
      */
@@ -40,6 +49,12 @@ class CommentairesController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $message = $commentaire->getContenuCommentaire();
+            $filtredMessage = $this->badwords($message);
+            $commentaire->setContenuCommentaire($filtredMessage);
+           //$commentaire->setDate(new \DateTime());
+
             $entityManager->persist($commentaire);
             $entityManager->flush();
             $this->sendEmail($mailer);
